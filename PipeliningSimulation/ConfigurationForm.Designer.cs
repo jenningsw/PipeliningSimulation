@@ -52,7 +52,7 @@ namespace PipeliningSimulation
             this.fpAddTextBox = new System.Windows.Forms.TextBox();
             this.fpSubTextBox = new System.Windows.Forms.TextBox();
             this.fpMulTextBox = new System.Windows.Forms.TextBox();
-            this.fpDivTextBox11 = new System.Windows.Forms.TextBox();
+            this.fpDivTextBox = new System.Windows.Forms.TextBox();
             this.updateButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -267,13 +267,13 @@ namespace PipeliningSimulation
             this.fpMulTextBox.Size = new System.Drawing.Size(100, 24);
             this.fpMulTextBox.TabIndex = 34;
             // 
-            // fpDivTextBox11
+            // fpDivTextBox
             // 
-            this.fpDivTextBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fpDivTextBox11.Location = new System.Drawing.Point(324, 206);
-            this.fpDivTextBox11.Name = "fpDivTextBox11";
-            this.fpDivTextBox11.Size = new System.Drawing.Size(100, 24);
-            this.fpDivTextBox11.TabIndex = 35;
+            this.fpDivTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fpDivTextBox.Location = new System.Drawing.Point(324, 206);
+            this.fpDivTextBox.Name = "fpDivTextBox";
+            this.fpDivTextBox.Size = new System.Drawing.Size(100, 24);
+            this.fpDivTextBox.TabIndex = 35;
             // 
             // updateButton
             // 
@@ -303,7 +303,7 @@ namespace PipeliningSimulation
             this.ClientSize = new System.Drawing.Size(492, 396);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.updateButton);
-            this.Controls.Add(this.fpDivTextBox11);
+            this.Controls.Add(this.fpDivTextBox);
             this.Controls.Add(this.fpMulTextBox);
             this.Controls.Add(this.fpSubTextBox);
             this.Controls.Add(this.fpAddTextBox);
@@ -330,6 +330,7 @@ namespace PipeliningSimulation
             this.Name = "ConfigurationForm";
             this.Text = "Configuration";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConfigurationForm_FormClosed);
+            this.Load += new System.EventHandler(this.ConfigurationForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -360,7 +361,7 @@ namespace PipeliningSimulation
         private System.Windows.Forms.TextBox fpAddTextBox;
         private System.Windows.Forms.TextBox fpSubTextBox;
         private System.Windows.Forms.TextBox fpMulTextBox;
-        private System.Windows.Forms.TextBox fpDivTextBox11;
+        private System.Windows.Forms.TextBox fpDivTextBox;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button closeButton;
     }

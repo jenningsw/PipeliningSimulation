@@ -44,6 +44,7 @@
             this.openFileButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
+            this.stepButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -228,37 +229,49 @@
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(29, 558);
+            this.openFileButton.Location = new System.Drawing.Point(58, 549);
             this.openFileButton.Name = "openFileButton";
-            this.openFileButton.Size = new System.Drawing.Size(233, 55);
+            this.openFileButton.Size = new System.Drawing.Size(153, 55);
             this.openFileButton.TabIndex = 53;
             this.openFileButton.Text = "Open Trace File";
             this.openFileButton.UseVisualStyleBackColor = true;
+            this.openFileButton.Click += new System.EventHandler(this.openFileButton_Click);
             // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(353, 558);
+            this.runButton.Location = new System.Drawing.Point(533, 549);
             this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(233, 55);
+            this.runButton.Size = new System.Drawing.Size(155, 55);
             this.runButton.TabIndex = 54;
             this.runButton.Text = "Run";
             this.runButton.UseVisualStyleBackColor = true;
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(676, 558);
+            this.exitButton.Location = new System.Drawing.Point(756, 549);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(233, 55);
+            this.exitButton.Size = new System.Drawing.Size(155, 55);
             this.exitButton.TabIndex = 55;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
+            // stepButton
+            // 
+            this.stepButton.Location = new System.Drawing.Point(299, 549);
+            this.stepButton.Name = "stepButton";
+            this.stepButton.Size = new System.Drawing.Size(153, 55);
+            this.stepButton.TabIndex = 56;
+            this.stepButton.Text = "Step";
+            this.stepButton.UseVisualStyleBackColor = true;
+            this.stepButton.Click += new System.EventHandler(this.stepButton_Click);
             // 
             // SimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(966, 650);
+            this.Controls.Add(this.stepButton);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.openFileButton);
@@ -310,6 +323,7 @@
         private System.Windows.Forms.Button openFileButton;
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Button stepButton;
     }
 }
 
