@@ -13,6 +13,7 @@ namespace PipeliningSimulation {
     public partial class SimulationForm : Form {
 
         public string[] Instructions { get; set; } = new string[50];
+        public List<Instruction> InstructionList { get; set; } = new List<Instruction>();
 
         public SimulationForm() {
             InitializeComponent();
@@ -68,7 +69,15 @@ namespace PipeliningSimulation {
                         input += "|" + line;
 
                     Instructions = input.Split("|".ToCharArray());
-                    instructsListBox.Items.AddRange(Instructions);   
+                    instructsListBox.Items.Clear();
+                    instructsListBox.Items.AddRange(Instructions); 
+                }
+
+                //Reload the instruction list to accomodate changes
+                InstructionList.Clear();
+                foreach (string instr in Instructions)
+                {
+                    InstructionList.Add(new Instruction(instr));
                 }
             }
         }
