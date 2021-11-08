@@ -32,8 +32,8 @@ namespace PipeliningSimulation
             //read in a text config file and set the values to the corresponding text boxes
 
             OpenFileDialog configFile = new OpenFileDialog();
-            configFile.InitialDirectory = "..\\Config Files";
-            configFile.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            configFile.InitialDirectory = "..\\..\\Config Files";
+            configFile.Filter = "txt files (*.txt)|*.txt|config files (*.cfg)|*.cfg|All files (*.*)|*.*";
             configFile.FilterIndex = 2;
 
             if (configFile.ShowDialog() == DialogResult.OK)
@@ -198,17 +198,70 @@ namespace PipeliningSimulation
 
         private void ConfigurationForm_Load(object sender, EventArgs e)
         {
-            buffersTextBox.Text = "(Yes/No)";
-            effAddrTextBox.Text = "(0-5)";
-            fpAddsTextBox.Text = "(0-5)";
-            fpMulsTextBox.Text = "(0-5)";
-            intsTextBox.Text = "(0-5)";
-            reorderTextBox.Text = "(0-5)";
-            latenciesTextBox.Text = "(Yes/No)";
-            fpAddTextBox.Text = "(0-5)";
-            fpSubTextBox.Text = "(0-5)";
-            fpMulTextBox.Text = "(0-5)";
-            fpDivTextBox.Text = "(0-10)";
+            //Set values in the configuration form based on already existing configuration settings
+
+            ListBox configListBox = _simForm.Controls["configListBox"] as ListBox;
+
+            if (configListBox.Items[0].ToString().Split(':')[1].Trim().Equals("T"))
+                buffersTextBox.Text = "Yes";
+            else
+                buffersTextBox.Text = "No";
+
+            effAddrTextBox.Text = configListBox.Items[1].ToString().Split(':')[1].Trim();
+            fpAddsTextBox.Text = configListBox.Items[2].ToString().Split(':')[1].Trim();
+            fpMulsTextBox.Text = configListBox.Items[3].ToString().Split(':')[1].Trim();
+            intsTextBox.Text = configListBox.Items[4].ToString().Split(':')[1].Trim();
+            reorderTextBox.Text = configListBox.Items[5].ToString().Split(':')[1].Trim();
+
+            if (configListBox.Items[6].ToString().Split(':')[1].Trim().Equals("T"))
+                latenciesTextBox.Text = "Yes";
+            else
+                latenciesTextBox.Text = "No";
+
+            fpAddTextBox.Text = configListBox.Items[7].ToString().Split(':')[1].Trim();
+            fpSubTextBox.Text = configListBox.Items[8].ToString().Split(':')[1].Trim();
+            fpMulTextBox.Text = configListBox.Items[9].ToString().Split(':')[1].Trim();
+            fpDivTextBox.Text = configListBox.Items[10].ToString().Split(':')[1].Trim();
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+
+            //Create a new save file dialog, set filter and initial directory settings, and show
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.InitialDirectory = "..\\..\\Config Files";
+            saveDialog.Filter = "txt files (*.txt)|*.txt|config files (*.cfg)|*.cfg|All files (*.*)|*.*";
+            saveDialog.FilterIndex = 4;
+            saveDialog.ShowDialog();
+
+            //If file name is not blank, safe the configuration settings
+            if (saveDialog.FileName != "")
+            {
+                StreamWriter streamWriter = new StreamWriter(saveDialog.OpenFile());
+
+                if (buffersTextBox.Text == "Yes")
+                    streamWriter.WriteLine("buffers\n");
+
+                streamWriter.WriteLine("eff addr: " + effAddrTextBox.Text);
+                streamWriter.WriteLine("fp adds: " + fpAddsTextBox.Text);
+                streamWriter.WriteLine("fp muls: " + fpMulsTextBox.Text);
+                streamWriter.WriteLine("ints: " + intsTextBox.Text);
+                streamWriter.WriteLine("reorder: " + reorderTextBox.Text);
+
+
+                streamWriter.WriteLine("");
+
+                if (latenciesTextBox.Text == "Yes")
+                    streamWriter.WriteLine("latencies\n");
+
+                streamWriter.WriteLine("fp_add: " + fpAddTextBox.Text);
+                streamWriter.WriteLine("fp_sub: " + fpSubTextBox.Text);
+                streamWriter.WriteLine("fp_mul: " + fpMulTextBox.Text);
+                streamWriter.WriteLine("fp_div: " + fpDivTextBox.Text);
+
+                streamWriter.Dispose();
+                streamWriter.Close();
+            }
         }
     }
 }
