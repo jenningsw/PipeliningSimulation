@@ -52,6 +52,7 @@
     <Compile Include="ConfigurationForm.Designer.cs">
       <DependentUpon>ConfigurationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Instruction.cs" />
     <Compile Include="PipelineForm.cs">
       <SubType>Form</SubType>
     </Compile>
