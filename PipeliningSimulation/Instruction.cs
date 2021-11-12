@@ -19,6 +19,13 @@ namespace PipeliningSimulation
         public string Operand2 { get; set; }
         public string Destination { get; set; }
 
+        public int TotalCycles; // how many cycles this instrution requires to execute
+        public int CyclesLeft; // how many cycles left in execution stage
+        public bool MovedUpPipeline = false; // has this instruction already completed the current pipeline stage and moved on to next? 
+        public bool Committed = false; // if instruction has been committed 
+        public string Output = ""; // probably temporary string that makes sure the memes are memeing  
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Instruction"/> class.
         /// </summary>
