@@ -12,18 +12,20 @@ namespace PipeliningSimulation
     /// </summary>
     public class Instruction
     {
-        public string InstructionString { get; set; }
-        public string InstructionName { get; set; }
-        public string Type { get; set; }
-        public string Operand1 { get; set; }
-        public string Operand2 { get; set; }
-        public string Destination { get; set; }
+        public string InstructionString { get; set; }       // original string of the instruction
+        public string InstructionName { get; set; }         // name of the instruction (i.e. bne, add, lw)
+        public int InstructionNumber { get; set; }          // number of the instruction in the pipeline
+        public string Type { get; set; }                    // type of the instruction
+        public string Operand1 { get; set; }                // first operand
+        public string Operand2 { get; set; }                // second operand
+        public string Destination { get; set; }             // destination of the instruction's result
+        public int LoopCount { get; set; }                  // number of times to loop [BRANCH INSTRUCTIONS ONLY]
 
-        public int TotalCycles; // how many cycles this instrution requires to execute
-        public int CyclesLeft; // how many cycles left in execution stage
-        public bool MovedUpPipeline = false; // has this instruction already completed the current pipeline stage and moved on to next? 
-        public bool Committed = false; // if instruction has been committed 
-        public string Output = ""; // probably temporary string that makes sure the memes are memeing  
+        public int TotalCycles;                 // how many cycles this instrution requires to execute
+        public int CyclesLeft;                  // how many cycles left in execution stage
+        public bool MovedUpPipeline = false;    // has this instruction already completed the current pipeline stage and moved on to next? 
+        public bool Committed = false;          // if instruction has been committed 
+        public string Output = "";              // probably temporary string that makes sure the memes are memeing  
 
 
         /// <summary>
@@ -33,10 +35,12 @@ namespace PipeliningSimulation
         {
             this.InstructionString = "";
             this.InstructionName = "";
+            this.InstructionNumber = 0;
             this.Type = "Null";
             this.Operand1 = "";
             this.Operand2 = "";
             this.Destination = "";
+            this.LoopCount = 0;
         }
 
         /// <summary>
@@ -64,6 +68,8 @@ namespace PipeliningSimulation
             //Fill the object properties with the appropriate data from the string
             this.InstructionName = instrElements[0];
             this.Type = DetermineType();
+            //Assume LoopCount is 0 by default
+            this.LoopCount = 0;
             //Logic for setting operands and destination
             #region operands
             //Store instructions have different operand order; Operate specially
@@ -86,6 +92,10 @@ namespace PipeliningSimulation
                 Operand1 = instrElements[1];
                 Operand2 = instrElements[2];
                 Destination = instrElements[3];
+
+                //If branch instruction has a value for number of times to loop, set number of times to loop
+                if (instrElements.Length >= 5)
+                    LoopCount = Convert.ToInt32(instrElements[4]);
             }
             //All arithmetic operations have same operand/destination layout
             else if (this.Type == "INT" || this.Type == "FADD" || this.Type == "FMUL")
@@ -94,12 +104,12 @@ namespace PipeliningSimulation
                 Operand1 = instrElements[2];
                 Operand2 = instrElements[3];
             }
-            //Any other type is unknown, blank out operands and destination
+            //Any other type is presumably a label, blank out operands and destination
             else
             {
                 Operand1 = "";
                 Operand2 = "";
-                Destination = "ttttt";
+                Destination = "";
             }
             #endregion operands
         }
@@ -137,8 +147,9 @@ namespace PipeliningSimulation
                 case "fdiv.s":
                     type = "FMUL";
                     break;
+                //If unknown instruction, assume it's a label
                 default:
-                    type = "UNKNOWN";
+                    type = "LABEL";
                     break;
             }
 

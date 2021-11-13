@@ -14,6 +14,7 @@ namespace PipeliningSimulation {
 
         public string[] Instructions { get; set; } = new string[50];
         public List<Instruction> InstructionList { get; set; } = new List<Instruction>();
+        public List<Instruction> LabelList { get; set; } = new List<Instruction>();
 
         public SimulationForm() {
             InitializeComponent();
@@ -77,9 +78,49 @@ namespace PipeliningSimulation {
                 InstructionList.Clear();
                 foreach (string instr in Instructions)
                 {
-                    InstructionList.Add(new Instruction(instr));
+                    Instruction newInstruction = new Instruction(instr);
+                    if (newInstruction.Type == "LABEL")
+                        LabelList.Add(newInstruction);
+                    else
+                        InstructionList.Add(newInstruction);
                 }
             }
+        }
+
+        //TODO: Delete this method before turning in
+        //Test method for checking instruction value successful setting
+        private void TestInstruction(Instruction instruction)
+        {
+            issuesListBox.Items.Add("name");
+            issuesListBox.Items.Add(instruction.InstructionName);
+            issuesListBox.Items.Add("op1");
+            issuesListBox.Items.Add(instruction.Operand1);
+            issuesListBox.Items.Add("op2");
+            issuesListBox.Items.Add(instruction.Operand2);
+            issuesListBox.Items.Add("dest");
+            issuesListBox.Items.Add(instruction.Destination);
+            issuesListBox.Items.Add("type");
+            issuesListBox.Items.Add(instruction.Type);
+            issuesListBox.Items.Add("loopcount");
+            issuesListBox.Items.Add(instruction.LoopCount);
+        }
+
+        //TODO: Delete this method before turning in
+        //Test method for checking branch label successful setting
+        private void TestLabel(Instruction instruction)
+        {
+            issuesListBox.Items.Add("name");
+            issuesListBox.Items.Add(instruction.InstructionName);
+            issuesListBox.Items.Add("op1");
+            issuesListBox.Items.Add(instruction.Operand1);
+            issuesListBox.Items.Add("op2");
+            issuesListBox.Items.Add(instruction.Operand2);
+            issuesListBox.Items.Add("dest");
+            issuesListBox.Items.Add(instruction.Destination);
+            issuesListBox.Items.Add("type");
+            issuesListBox.Items.Add(instruction.Type);
+            issuesListBox.Items.Add("loopcount");
+            issuesListBox.Items.Add(instruction.LoopCount);
         }
     }
 }

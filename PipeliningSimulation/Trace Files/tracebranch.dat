@@ -1,0 +1,5 @@
+flw f6,32(x2):0
+flw f8,32(x2):0
+loop:
+fadd.s f2,f8,f6
+bne f2,f8,loop:3
