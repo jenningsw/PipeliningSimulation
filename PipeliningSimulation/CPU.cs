@@ -57,7 +57,10 @@ namespace PipeliningSimulation {
 
             // fetch first instruction;
             pipeline[0].Add(instructions[idxInst]);
-            // remove from list of instructions 
+
+            // mark destination reg as being used 
+            SetDestRegisterUseage(instructions[idxInst]);
+
             idxInst++;
         }
 
@@ -67,6 +70,11 @@ namespace PipeliningSimulation {
                 // if instruction was just moved up pipeline 
                 if (exe[i].MovedUpPipeline)
                     continue;
+
+                // now we need to check for dependencies 
+                if (CheckDependency(exe[i]))
+                    continue; 
+
                 // if first cycle of execution 
                 if (exe[i].CyclesLeft == exe[i].TotalCycles) {
                     exe[i].Results[1] = cycle + "-";
@@ -107,6 +115,12 @@ namespace PipeliningSimulation {
             write[0].Results[3] = cycle.ToString();
             write[0].MovedUpPipeline = true;
             pipeline[4].Add(write[0]);
+
+            // dest register is no longer in use 
+            int destID = OperandToRegID(write[0].Destination);
+            registers[destID].InUse = false;
+            registers[destID].instIDX.Remove(instructions.IndexOf(write[0]));
+
             write.RemoveAt(0);
         }
 
@@ -127,6 +141,7 @@ namespace PipeliningSimulation {
                 commit[i].Results[4] = cycle.ToString();
                 commit[i].MovedUpPipeline = true;
                 commit[i].Committed = true;
+
                 commit.RemoveAt(i);
                 return;
             }
@@ -150,6 +165,44 @@ namespace PipeliningSimulation {
                     pipeline[i][j].MovedUpPipeline = false;
                 }
             }
+        }
+
+        private int OperandToRegID(string op) {
+            return int.Parse(op.Remove(0, 1));
+        }
+
+        private void SetDestRegisterUseage(Instruction inst) {
+            int destRegID = OperandToRegID(inst.Destination);
+            registers[destRegID].InUse = true;
+            registers[destRegID].instIDX.Add(idxInst);
+        }
+
+        /// <summary>
+        /// Determines if we are trying to use any registers which are currently in use 
+        /// </summary>
+        /// <param name="inst"></param>
+        /// <returns>True if dependency is found</returns>
+        private bool CheckDependency(Instruction inst) {
+
+            if (inst.Operand1.Contains("f")) {
+                int op1ID = OperandToRegID(inst.Operand1);
+                if (registers[op1ID].InUse) {
+                    foreach (int n in registers[op1ID].instIDX) {
+                        if (n < instructions.IndexOf(inst))
+                            return true;
+                    }
+                }
+            }
+            if (inst.Operand2.Contains("f")) {
+                int op2ID = OperandToRegID(inst.Operand2);
+                if (registers[op2ID].InUse) {
+                    foreach (int n in registers[op2ID].instIDX) {
+                        if (n < instructions.IndexOf(inst))
+                            return true;
+                    }
+                }
+            }
+            return false; 
         }
     }
 }
