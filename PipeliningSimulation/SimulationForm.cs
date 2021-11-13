@@ -27,7 +27,8 @@ namespace PipeliningSimulation {
 
         private void SetDefaults()
         {
-            string[] defaultConfigText = { "Buffers: ", "Eff Addr: ", "FP Adds: ", "FP Muls: ", "Ints: ", "Reorder: ", "Latencies: ", "FP Add: ", "FP Sub: ", "FP Mul: ", "FP Div: " };
+            string[] defaultConfigText = { "Buffers: ", "Eff Addr: 2", "FP Adds: 3", "FP Muls: 3", "Ints: 3", "Reorder: 5", 
+                "Latencies: ", "FP Add: 2", "FP Sub: 2", "FP Mul: 5", "FP Div: 10" };
             configListBox.Items.AddRange(defaultConfigText);
 
             string[] defaultDelaysText = { "Reorder buffer delays: ", "Reservation station delays", "Data memory conflict delays: ", "True dependence delays: " };
@@ -121,6 +122,19 @@ namespace PipeliningSimulation {
             issuesListBox.Items.Add(instruction.Type);
             issuesListBox.Items.Add("loopcount");
             issuesListBox.Items.Add(instruction.LoopCount);
+        }
+
+        private void runButton_Click(object sender, EventArgs e) {
+            if (InstructionList.Count > 0) {
+                CPU cpu = new CPU(InstructionList);
+                foreach (Instruction i in cpu.instructions) {
+                    issuesListBox.Items.Add(i.Results[0]);
+                    execListBox.Items.Add(i.Results[1]);
+                    readListBox.Items.Add(i.Results[2]);
+                    writeListBox.Items.Add(i.Results[3]);
+                    commitsListBox.Items.Add(i.Results[4]);
+                }
+            }
         }
     }
 }

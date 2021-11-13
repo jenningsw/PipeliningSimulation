@@ -245,6 +245,7 @@
             this.runButton.TabIndex = 54;
             this.runButton.Text = "Run";
             this.runButton.UseVisualStyleBackColor = true;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
             // 
             // exitButton
             // 
@@ -294,6 +295,7 @@
             this.Controls.Add(this.configLabel);
             this.Controls.Add(this.titleLabel);
             this.Name = "SimulationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pipelining Simulation";
             this.Load += new System.EventHandler(this.SimulationForm_Load);
             this.ResumeLayout(false);

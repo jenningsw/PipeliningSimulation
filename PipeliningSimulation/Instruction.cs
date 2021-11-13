@@ -21,11 +21,11 @@ namespace PipeliningSimulation
         public string Destination { get; set; }             // destination of the instruction's result
         public int LoopCount { get; set; }                  // number of times to loop [BRANCH INSTRUCTIONS ONLY]
 
-        public int TotalCycles;                 // how many cycles this instrution requires to execute
-        public int CyclesLeft;                  // how many cycles left in execution stage
+        public int TotalCycles = 1;                 // how many cycles this instrution requires to execute
+        public int CyclesLeft = 1;                  // how many cycles left in execution stage
         public bool MovedUpPipeline = false;    // has this instruction already completed the current pipeline stage and moved on to next? 
         public bool Committed = false;          // if instruction has been committed 
-        public string Output = "";              // probably temporary string that makes sure the memes are memeing  
+        public string[] Results = new string[5];
 
 
         /// <summary>
@@ -47,8 +47,12 @@ namespace PipeliningSimulation
         /// Initializes a new instance of the <see cref="Instruction"/> class.
         /// </summary>
         /// <param name="instrString">The instruction string to build the Instruction from.</param>
-        public Instruction(string instrString)
+        public Instruction(string instrString, int latencyAdd = 2, int latencySub = 2, int latencyMul = 5, int latencyDiv = 10)
         {
+            // default values for results array to avoid annoying null issues 
+            for (int i = 0; i < 5; i++)
+                Results[i] = "";
+
             this.InstructionString = instrString;
 
             //Replace commas and colons with spaces for easy splitting
@@ -112,6 +116,8 @@ namespace PipeliningSimulation
                 Destination = "";
             }
             #endregion operands
+
+            SetCycles(latencyAdd, latencySub, latencyMul, latencyDiv);
         }
 
         /// <summary>
@@ -176,6 +182,29 @@ namespace PipeliningSimulation
             //Calculate and return address as string
             int address = regValue + offsetValue;
             return address.ToString();
+        }
+
+        private void SetCycles(int latAdd, int latSub, int latMul, int latDiv) {
+            switch (InstructionName.ToLower()) {
+                case "fadd.s":
+                    TotalCycles = latAdd;
+                    break;
+                case "fsub.s":
+                    TotalCycles = latSub;
+                    break;
+                case "fmul.s":
+                    TotalCycles = latMul;
+                    break;
+                case "fdiv.s":
+                    TotalCycles = latDiv;
+                    break;
+                default:
+                    TotalCycles = 1;
+                    break;
+            }
+
+            CyclesLeft = TotalCycles;
+
         }
     }
 }
