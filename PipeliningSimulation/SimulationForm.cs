@@ -172,6 +172,12 @@ namespace PipeliningSimulation {
             writeListBox.Items.Clear();
             commitsListBox.Items.Clear();
         }
+
+        private void referencePageButton_Click(object sender, EventArgs e)
+        {
+            InstructionReferenceForm refform = new InstructionReferenceForm();
+            refform.Show();
+        }
     }
 }
 
