@@ -9,8 +9,9 @@ namespace PipeliningSimulation {
         public List<Instruction> instructions = new List<Instruction>();
         int idxInst = 0; // index of curr instruction 
         List<List<Instruction>> pipeline = new List<List<Instruction>>(); // instructions in each stage of pipeline 
-        int cycle = 0;
+        public int cycle = 0;
         Register[] registers = new Register[16];
+        public int trueDependenceDelays = 0; 
 
         public CPU(List<Instruction> inst) {
 
@@ -23,9 +24,6 @@ namespace PipeliningSimulation {
 
             instructions = inst;
 
-            do {
-                Cycle();
-            } while (!PipelineEmpty());
         }
 
         /// <summary>
@@ -72,12 +70,14 @@ namespace PipeliningSimulation {
                     continue;
 
                 // now we need to check for dependencies 
-                if (CheckDependency(exe[i]))
-                    continue; 
+                if (CheckDependency(exe[i])) {
+                    trueDependenceDelays++;
+                    continue;
+                }
 
                 // if first cycle of execution 
                 if (exe[i].CyclesLeft == exe[i].TotalCycles) {
-                    exe[i].Results[1] = cycle + "-";
+                    exe[i].Results[1] = cycle + " - ";
                 }
 
                 exe[i].CyclesLeft--;
@@ -131,7 +131,7 @@ namespace PipeliningSimulation {
             for (int i = 0; i < commit.Count; i++) {
                 if (commit[i].MovedUpPipeline)
                     continue;
-
+                // has the previous instruction been committed yet? 
                 int instIdx = instructions.IndexOf(commit[i]);
                 if (instIdx > 0) {
                     if (!instructions[instIdx - 1].Committed)
@@ -148,7 +148,7 @@ namespace PipeliningSimulation {
 
         }
 
-        private bool PipelineEmpty() {
+        private bool IsPipelineEmpty() {
             for (int i = 0; i < pipeline.Count; i++) {
                 if (pipeline[i].Count > 0)
                     return false;
@@ -183,7 +183,8 @@ namespace PipeliningSimulation {
         /// <param name="inst"></param>
         /// <returns>True if dependency is found</returns>
         private bool CheckDependency(Instruction inst) {
-
+            // if an operand is a register, check to see if it's being used by an instruction that is before the current instruction
+            // if so, this will be a dependency and we should return true
             if (inst.Operand1.Contains("f")) {
                 int op1ID = OperandToRegID(inst.Operand1);
                 if (registers[op1ID].InUse) {
@@ -203,6 +204,16 @@ namespace PipeliningSimulation {
                 }
             }
             return false; 
+        }
+
+        public void RunToEnd() {
+            do {
+                Cycle();
+            } while (!IsPipelineEmpty());
+        }
+
+        public void Step() {
+            Cycle();
         }
     }
 }

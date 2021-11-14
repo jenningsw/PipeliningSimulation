@@ -45,6 +45,7 @@
             this.runButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.stepButton = new System.Windows.Forms.Button();
+            this.lblCycleCount = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -229,7 +230,7 @@
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(58, 549);
+            this.openFileButton.Location = new System.Drawing.Point(65, 549);
             this.openFileButton.Name = "openFileButton";
             this.openFileButton.Size = new System.Drawing.Size(153, 55);
             this.openFileButton.TabIndex = 53;
@@ -239,7 +240,7 @@
             // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(533, 549);
+            this.runButton.Location = new System.Drawing.Point(546, 549);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(155, 55);
             this.runButton.TabIndex = 54;
@@ -259,7 +260,7 @@
             // 
             // stepButton
             // 
-            this.stepButton.Location = new System.Drawing.Point(299, 549);
+            this.stepButton.Location = new System.Drawing.Point(327, 549);
             this.stepButton.Name = "stepButton";
             this.stepButton.Size = new System.Drawing.Size(153, 55);
             this.stepButton.TabIndex = 56;
@@ -267,11 +268,22 @@
             this.stepButton.UseVisualStyleBackColor = true;
             this.stepButton.Click += new System.EventHandler(this.stepButton_Click);
             // 
+            // lblCycleCount
+            // 
+            this.lblCycleCount.AutoSize = true;
+            this.lblCycleCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCycleCount.Location = new System.Drawing.Point(323, 509);
+            this.lblCycleCount.Name = "lblCycleCount";
+            this.lblCycleCount.Size = new System.Drawing.Size(112, 20);
+            this.lblCycleCount.TabIndex = 57;
+            this.lblCycleCount.Text = "Current Cycle: ";
+            // 
             // SimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(966, 650);
+            this.Controls.Add(this.lblCycleCount);
             this.Controls.Add(this.stepButton);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.runButton);
@@ -326,6 +338,7 @@
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Button stepButton;
+        private System.Windows.Forms.Label lblCycleCount;
     }
 }
 

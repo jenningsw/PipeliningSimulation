@@ -15,6 +15,7 @@ namespace PipeliningSimulation {
         public string[] Instructions { get; set; } = new string[50];
         public List<Instruction> InstructionList { get; set; } = new List<Instruction>();
         public List<Instruction> LabelList { get; set; } = new List<Instruction>();
+        CPU cpu; 
 
         public SimulationForm() {
             InitializeComponent();
@@ -49,8 +50,29 @@ namespace PipeliningSimulation {
 
         private void stepButton_Click(object sender, EventArgs e)
         {
-            PipelineForm sim = new PipelineForm(this);
-            sim.Show();
+            /*PipelineForm sim = new PipelineForm(this);
+            sim.Show();*/
+
+            if (InstructionList.Count > 0) {
+                cpu.Step();
+
+                lblCycleCount.Text = "Current Cycle: " + (cpu.cycle - 1); 
+
+                ClearPipelineInfo();
+
+                foreach (Instruction i in cpu.instructions) {
+                    issuesListBox.Items.Add(i.Results[0]);
+                    execListBox.Items.Add(i.Results[1]);
+                    readListBox.Items.Add(i.Results[2]);
+                    writeListBox.Items.Add(i.Results[3]);
+                    commitsListBox.Items.Add(i.Results[4]);
+                }
+
+                string[] delays = { "Reorder buffer delays: ", "Reservation station delays",
+                    "Data memory conflict delays: ", "True dependence delays: "  + cpu.trueDependenceDelays};
+                delaysListBox.Items.Clear();
+                delaysListBox.Items.AddRange(delays);
+            }
         }
 
         private void openFileButton_Click(object sender, EventArgs e)
@@ -85,6 +107,7 @@ namespace PipeliningSimulation {
                     else
                         InstructionList.Add(newInstruction);
                 }
+                cpu = new CPU(InstructionList);
             }
         }
 
@@ -126,7 +149,8 @@ namespace PipeliningSimulation {
 
         private void runButton_Click(object sender, EventArgs e) {
             if (InstructionList.Count > 0) {
-                CPU cpu = new CPU(InstructionList);
+                ClearPipelineInfo();
+                cpu.RunToEnd();
                 foreach (Instruction i in cpu.instructions) {
                     issuesListBox.Items.Add(i.Results[0]);
                     execListBox.Items.Add(i.Results[1]);
@@ -134,7 +158,23 @@ namespace PipeliningSimulation {
                     writeListBox.Items.Add(i.Results[3]);
                     commitsListBox.Items.Add(i.Results[4]);
                 }
+
+                string[] delays = { "Reorder buffer delays: ", "Reservation station delays", 
+                    "Data memory conflict delays: ", "True dependence delays: "  + cpu.trueDependenceDelays};
+                delaysListBox.Items.Clear();
+                delaysListBox.Items.AddRange(delays);
+
             }
+        }
+
+        private void ClearPipelineInfo() {
+            issuesListBox.Items.Clear();
+            execListBox.Items.Clear();
+            readListBox.Items.Clear();
+            writeListBox.Items.Clear();
+            commitsListBox.Items.Clear();
         }
     }
 }
+
+
