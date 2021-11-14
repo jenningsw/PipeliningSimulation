@@ -50,8 +50,6 @@ namespace PipeliningSimulation {
 
         private void stepButton_Click(object sender, EventArgs e)
         {
-            /*PipelineForm sim = new PipelineForm(this);
-            sim.Show();*/
 
             if (InstructionList.Count > 0) {
                 cpu.Step();
