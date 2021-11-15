@@ -46,6 +46,7 @@
             this.exitButton = new System.Windows.Forms.Button();
             this.stepButton = new System.Windows.Forms.Button();
             this.lblCycleCount = new System.Windows.Forms.Label();
+            this.referencePageButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -230,7 +231,7 @@
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(65, 549);
+            this.openFileButton.Location = new System.Drawing.Point(224, 549);
             this.openFileButton.Name = "openFileButton";
             this.openFileButton.Size = new System.Drawing.Size(153, 55);
             this.openFileButton.TabIndex = 53;
@@ -240,7 +241,7 @@
             // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(546, 549);
+            this.runButton.Location = new System.Drawing.Point(584, 549);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(155, 55);
             this.runButton.TabIndex = 54;
@@ -260,7 +261,7 @@
             // 
             // stepButton
             // 
-            this.stepButton.Location = new System.Drawing.Point(327, 549);
+            this.stepButton.Location = new System.Drawing.Point(405, 549);
             this.stepButton.Name = "stepButton";
             this.stepButton.Size = new System.Drawing.Size(153, 55);
             this.stepButton.TabIndex = 56;
@@ -278,11 +279,22 @@
             this.lblCycleCount.TabIndex = 57;
             this.lblCycleCount.Text = "Current Cycle: ";
             // 
+            // referencePageButton
+            // 
+            this.referencePageButton.Location = new System.Drawing.Point(44, 549);
+            this.referencePageButton.Name = "referencePageButton";
+            this.referencePageButton.Size = new System.Drawing.Size(153, 55);
+            this.referencePageButton.TabIndex = 58;
+            this.referencePageButton.Text = "Instruction Reference";
+            this.referencePageButton.UseVisualStyleBackColor = true;
+            this.referencePageButton.Click += new System.EventHandler(this.referencePageButton_Click);
+            // 
             // SimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(966, 650);
+            this.Controls.Add(this.referencePageButton);
             this.Controls.Add(this.lblCycleCount);
             this.Controls.Add(this.stepButton);
             this.Controls.Add(this.exitButton);
@@ -339,6 +351,7 @@
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Button stepButton;
         private System.Windows.Forms.Label lblCycleCount;
+        private System.Windows.Forms.Button referencePageButton;
     }
 }
 
