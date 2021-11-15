@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SimulationForm));
             this.titleLabel = new System.Windows.Forms.Label();
             this.configLabel = new System.Windows.Forms.Label();
             this.configListBox = new System.Windows.Forms.ListBox();
@@ -47,13 +48,16 @@
             this.stepButton = new System.Windows.Forms.Button();
             this.lblCycleCount = new System.Windows.Forms.Label();
             this.referencePageButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.restartButton = new System.Windows.Forms.Button();
+            this.cycleCountLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(507, 22);
+            this.titleLabel.Location = new System.Drawing.Point(488, 22);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(262, 31);
             this.titleLabel.TabIndex = 13;
@@ -63,7 +67,7 @@
             // 
             this.configLabel.AutoSize = true;
             this.configLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.configLabel.Location = new System.Drawing.Point(78, 36);
+            this.configLabel.Location = new System.Drawing.Point(72, 22);
             this.configLabel.Name = "configLabel";
             this.configLabel.Size = new System.Drawing.Size(140, 25);
             this.configLabel.TabIndex = 36;
@@ -74,7 +78,7 @@
             this.configListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.configListBox.FormattingEnabled = true;
             this.configListBox.ItemHeight = 16;
-            this.configListBox.Location = new System.Drawing.Point(83, 75);
+            this.configListBox.Location = new System.Drawing.Point(84, 50);
             this.configListBox.Name = "configListBox";
             this.configListBox.Size = new System.Drawing.Size(128, 180);
             this.configListBox.TabIndex = 37;
@@ -83,7 +87,7 @@
             // 
             this.delaysLabel.AutoSize = true;
             this.delaysLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delaysLabel.Location = new System.Drawing.Point(108, 398);
+            this.delaysLabel.Location = new System.Drawing.Point(112, 385);
             this.delaysLabel.Name = "delaysLabel";
             this.delaysLabel.Size = new System.Drawing.Size(78, 25);
             this.delaysLabel.TabIndex = 38;
@@ -94,7 +98,7 @@
             this.delaysListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.delaysListBox.FormattingEnabled = true;
             this.delaysListBox.ItemHeight = 16;
-            this.delaysListBox.Location = new System.Drawing.Point(29, 438);
+            this.delaysListBox.Location = new System.Drawing.Point(33, 425);
             this.delaysListBox.Name = "delaysListBox";
             this.delaysListBox.Size = new System.Drawing.Size(233, 68);
             this.delaysListBox.TabIndex = 39;
@@ -221,7 +225,7 @@
             // 
             // configButtion
             // 
-            this.configButtion.Location = new System.Drawing.Point(83, 282);
+            this.configButtion.Location = new System.Drawing.Point(84, 236);
             this.configButtion.Name = "configButtion";
             this.configButtion.Size = new System.Drawing.Size(128, 51);
             this.configButtion.TabIndex = 52;
@@ -289,11 +293,44 @@
             this.referencePageButton.UseVisualStyleBackColor = true;
             this.referencePageButton.Click += new System.EventHandler(this.referencePageButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(83, 290);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 25);
+            this.label1.TabIndex = 59;
+            this.label1.Text = "Cycle Count";
+            // 
+            // restartButton
+            // 
+            this.restartButton.Location = new System.Drawing.Point(933, 549);
+            this.restartButton.Name = "restartButton";
+            this.restartButton.Size = new System.Drawing.Size(128, 51);
+            this.restartButton.TabIndex = 61;
+            this.restartButton.Text = "Reset Simulation";
+            this.restartButton.UseVisualStyleBackColor = true;
+            this.restartButton.Click += new System.EventHandler(this.restartButton_Click);
+            // 
+            // cycleCountLabel
+            // 
+            this.cycleCountLabel.AutoSize = true;
+            this.cycleCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cycleCountLabel.Location = new System.Drawing.Point(142, 324);
+            this.cycleCountLabel.Name = "cycleCountLabel";
+            this.cycleCountLabel.Size = new System.Drawing.Size(32, 36);
+            this.cycleCountLabel.TabIndex = 62;
+            this.cycleCountLabel.Text = "0";
+            // 
             // SimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(966, 650);
+            this.ClientSize = new System.Drawing.Size(1120, 650);
+            this.Controls.Add(this.cycleCountLabel);
+            this.Controls.Add(this.restartButton);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.referencePageButton);
             this.Controls.Add(this.lblCycleCount);
             this.Controls.Add(this.stepButton);
@@ -318,6 +355,7 @@
             this.Controls.Add(this.configListBox);
             this.Controls.Add(this.configLabel);
             this.Controls.Add(this.titleLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SimulationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pipelining Simulation";
@@ -352,6 +390,9 @@
         private System.Windows.Forms.Button stepButton;
         private System.Windows.Forms.Label lblCycleCount;
         private System.Windows.Forms.Button referencePageButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button restartButton;
+        private System.Windows.Forms.Label cycleCountLabel;
     }
 }
 

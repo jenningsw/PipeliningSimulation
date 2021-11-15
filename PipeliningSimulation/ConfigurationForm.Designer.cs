@@ -29,6 +29,7 @@ namespace PipeliningSimulation
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigurationForm));
             this.fpDivLabel = new System.Windows.Forms.Label();
             this.effLabel = new System.Windows.Forms.Label();
             this.fpAddsLabel = new System.Windows.Forms.Label();
@@ -71,10 +72,9 @@ namespace PipeliningSimulation
             // 
             this.fpDivLabel.AutoSize = true;
             this.fpDivLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fpDivLabel.Location = new System.Drawing.Point(319, 257);
-            this.fpDivLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.fpDivLabel.Location = new System.Drawing.Point(239, 209);
             this.fpDivLabel.Name = "fpDivLabel";
-            this.fpDivLabel.Size = new System.Drawing.Size(70, 24);
+            this.fpDivLabel.Size = new System.Drawing.Size(56, 18);
             this.fpDivLabel.TabIndex = 23;
             this.fpDivLabel.Text = "FP Div:";
             // 
@@ -82,10 +82,9 @@ namespace PipeliningSimulation
             // 
             this.effLabel.AutoSize = true;
             this.effLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.effLabel.Location = new System.Drawing.Point(56, 139);
-            this.effLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.effLabel.Location = new System.Drawing.Point(42, 113);
             this.effLabel.Name = "effLabel";
-            this.effLabel.Size = new System.Drawing.Size(82, 24);
+            this.effLabel.Size = new System.Drawing.Size(64, 18);
             this.effLabel.TabIndex = 22;
             this.effLabel.Text = "Eff Addr:";
             // 
@@ -93,10 +92,9 @@ namespace PipeliningSimulation
             // 
             this.fpAddsLabel.AutoSize = true;
             this.fpAddsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fpAddsLabel.Location = new System.Drawing.Point(56, 180);
-            this.fpAddsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.fpAddsLabel.Location = new System.Drawing.Point(42, 146);
             this.fpAddsLabel.Name = "fpAddsLabel";
-            this.fpAddsLabel.Size = new System.Drawing.Size(88, 24);
+            this.fpAddsLabel.Size = new System.Drawing.Size(68, 18);
             this.fpAddsLabel.TabIndex = 21;
             this.fpAddsLabel.Text = "FP Adds:";
             // 
@@ -104,10 +102,9 @@ namespace PipeliningSimulation
             // 
             this.fpMulLabel.AutoSize = true;
             this.fpMulLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fpMulLabel.Location = new System.Drawing.Point(319, 219);
-            this.fpMulLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.fpMulLabel.Location = new System.Drawing.Point(239, 178);
             this.fpMulLabel.Name = "fpMulLabel";
-            this.fpMulLabel.Size = new System.Drawing.Size(75, 24);
+            this.fpMulLabel.Size = new System.Drawing.Size(59, 18);
             this.fpMulLabel.TabIndex = 20;
             this.fpMulLabel.Text = "FP Mul:";
             // 
@@ -115,10 +112,9 @@ namespace PipeliningSimulation
             // 
             this.fpSubLabel.AutoSize = true;
             this.fpSubLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fpSubLabel.Location = new System.Drawing.Point(319, 180);
-            this.fpSubLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.fpSubLabel.Location = new System.Drawing.Point(239, 146);
             this.fpSubLabel.Name = "fpSubLabel";
-            this.fpSubLabel.Size = new System.Drawing.Size(78, 24);
+            this.fpSubLabel.Size = new System.Drawing.Size(61, 18);
             this.fpSubLabel.TabIndex = 19;
             this.fpSubLabel.Text = "FP Sub:";
             // 
@@ -126,10 +122,9 @@ namespace PipeliningSimulation
             // 
             this.fpAddLabel.AutoSize = true;
             this.fpAddLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fpAddLabel.Location = new System.Drawing.Point(319, 139);
-            this.fpAddLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.fpAddLabel.Location = new System.Drawing.Point(239, 113);
             this.fpAddLabel.Name = "fpAddLabel";
-            this.fpAddLabel.Size = new System.Drawing.Size(79, 24);
+            this.fpAddLabel.Size = new System.Drawing.Size(60, 18);
             this.fpAddLabel.TabIndex = 18;
             this.fpAddLabel.Text = "FP Add:";
             // 
@@ -137,10 +132,9 @@ namespace PipeliningSimulation
             // 
             this.latenciesLabel.AutoSize = true;
             this.latenciesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.latenciesLabel.Location = new System.Drawing.Point(319, 100);
-            this.latenciesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.latenciesLabel.Location = new System.Drawing.Point(239, 81);
             this.latenciesLabel.Name = "latenciesLabel";
-            this.latenciesLabel.Size = new System.Drawing.Size(95, 24);
+            this.latenciesLabel.Size = new System.Drawing.Size(75, 18);
             this.latenciesLabel.TabIndex = 17;
             this.latenciesLabel.Text = "Latencies:";
             // 
@@ -148,10 +142,9 @@ namespace PipeliningSimulation
             // 
             this.fpMulsLabel.AutoSize = true;
             this.fpMulsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fpMulsLabel.Location = new System.Drawing.Point(56, 219);
-            this.fpMulsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.fpMulsLabel.Location = new System.Drawing.Point(42, 178);
             this.fpMulsLabel.Name = "fpMulsLabel";
-            this.fpMulsLabel.Size = new System.Drawing.Size(84, 24);
+            this.fpMulsLabel.Size = new System.Drawing.Size(67, 18);
             this.fpMulsLabel.TabIndex = 16;
             this.fpMulsLabel.Text = "FP Muls:";
             // 
@@ -159,10 +152,9 @@ namespace PipeliningSimulation
             // 
             this.intsLabel.AutoSize = true;
             this.intsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.intsLabel.Location = new System.Drawing.Point(56, 257);
-            this.intsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.intsLabel.Location = new System.Drawing.Point(42, 209);
             this.intsLabel.Name = "intsLabel";
-            this.intsLabel.Size = new System.Drawing.Size(43, 24);
+            this.intsLabel.Size = new System.Drawing.Size(35, 18);
             this.intsLabel.TabIndex = 15;
             this.intsLabel.Text = "Ints:";
             // 
@@ -170,10 +162,9 @@ namespace PipeliningSimulation
             // 
             this.reorderLabel.AutoSize = true;
             this.reorderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reorderLabel.Location = new System.Drawing.Point(56, 300);
-            this.reorderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.reorderLabel.Location = new System.Drawing.Point(42, 244);
             this.reorderLabel.Name = "reorderLabel";
-            this.reorderLabel.Size = new System.Drawing.Size(84, 24);
+            this.reorderLabel.Size = new System.Drawing.Size(66, 18);
             this.reorderLabel.TabIndex = 14;
             this.reorderLabel.Text = "Reorder:";
             // 
@@ -181,10 +172,9 @@ namespace PipeliningSimulation
             // 
             this.bufferLabel.AutoSize = true;
             this.bufferLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bufferLabel.Location = new System.Drawing.Point(56, 100);
-            this.bufferLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.bufferLabel.Location = new System.Drawing.Point(42, 81);
             this.bufferLabel.Name = "bufferLabel";
-            this.bufferLabel.Size = new System.Drawing.Size(72, 24);
+            this.bufferLabel.Size = new System.Drawing.Size(59, 18);
             this.bufferLabel.TabIndex = 13;
             this.bufferLabel.Text = "Buffers:";
             // 
@@ -192,19 +182,17 @@ namespace PipeliningSimulation
             // 
             this.configLabel.AutoSize = true;
             this.configLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.configLabel.Location = new System.Drawing.Point(201, 26);
-            this.configLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.configLabel.Location = new System.Drawing.Point(151, 21);
             this.configLabel.Name = "configLabel";
-            this.configLabel.Size = new System.Drawing.Size(220, 39);
+            this.configLabel.Size = new System.Drawing.Size(176, 31);
             this.configLabel.TabIndex = 12;
             this.configLabel.Text = "Configuration";
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(33, 369);
-            this.openFileButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.openFileButton.Location = new System.Drawing.Point(25, 300);
             this.openFileButton.Name = "openFileButton";
-            this.openFileButton.Size = new System.Drawing.Size(140, 70);
+            this.openFileButton.Size = new System.Drawing.Size(105, 57);
             this.openFileButton.TabIndex = 12;
             this.openFileButton.Text = "Load File";
             this.openFileButton.UseVisualStyleBackColor = true;
@@ -212,10 +200,9 @@ namespace PipeliningSimulation
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(329, 369);
-            this.updateButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.updateButton.Location = new System.Drawing.Point(247, 300);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(140, 70);
+            this.updateButton.Size = new System.Drawing.Size(105, 57);
             this.updateButton.TabIndex = 14;
             this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = true;
@@ -223,10 +210,9 @@ namespace PipeliningSimulation
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(477, 369);
-            this.closeButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.closeButton.Location = new System.Drawing.Point(358, 300);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(140, 70);
+            this.closeButton.Size = new System.Drawing.Size(105, 57);
             this.closeButton.TabIndex = 15;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
@@ -235,118 +221,127 @@ namespace PipeliningSimulation
             // fpMulsTextBox
             // 
             this.fpMulsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.fpMulsTextBox.Location = new System.Drawing.Point(153, 215);
+            this.fpMulsTextBox.Location = new System.Drawing.Point(115, 175);
+            this.fpMulsTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fpMulsTextBox.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
             this.fpMulsTextBox.Name = "fpMulsTextBox";
-            this.fpMulsTextBox.Size = new System.Drawing.Size(132, 29);
+            this.fpMulsTextBox.Size = new System.Drawing.Size(99, 24);
             this.fpMulsTextBox.TabIndex = 4;
             // 
             // fpAddsTextBox
             // 
             this.fpAddsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.fpAddsTextBox.Location = new System.Drawing.Point(153, 176);
+            this.fpAddsTextBox.Location = new System.Drawing.Point(115, 143);
+            this.fpAddsTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fpAddsTextBox.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
             this.fpAddsTextBox.Name = "fpAddsTextBox";
-            this.fpAddsTextBox.Size = new System.Drawing.Size(132, 29);
+            this.fpAddsTextBox.Size = new System.Drawing.Size(99, 24);
             this.fpAddsTextBox.TabIndex = 3;
             // 
             // intsTextBox
             // 
             this.intsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.intsTextBox.Location = new System.Drawing.Point(153, 254);
+            this.intsTextBox.Location = new System.Drawing.Point(115, 206);
+            this.intsTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.intsTextBox.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
             this.intsTextBox.Name = "intsTextBox";
-            this.intsTextBox.Size = new System.Drawing.Size(132, 29);
+            this.intsTextBox.Size = new System.Drawing.Size(99, 24);
             this.intsTextBox.TabIndex = 5;
             // 
             // effAddrTextBox
             // 
             this.effAddrTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.effAddrTextBox.Location = new System.Drawing.Point(153, 135);
+            this.effAddrTextBox.Location = new System.Drawing.Point(115, 110);
+            this.effAddrTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.effAddrTextBox.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
             this.effAddrTextBox.Name = "effAddrTextBox";
-            this.effAddrTextBox.Size = new System.Drawing.Size(132, 29);
+            this.effAddrTextBox.Size = new System.Drawing.Size(99, 24);
             this.effAddrTextBox.TabIndex = 2;
             // 
             // reorderTextBox
             // 
             this.reorderTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.reorderTextBox.Location = new System.Drawing.Point(153, 297);
+            this.reorderTextBox.Location = new System.Drawing.Point(115, 241);
+            this.reorderTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.reorderTextBox.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
             this.reorderTextBox.Name = "reorderTextBox";
-            this.reorderTextBox.Size = new System.Drawing.Size(132, 29);
+            this.reorderTextBox.Size = new System.Drawing.Size(99, 24);
             this.reorderTextBox.TabIndex = 6;
             // 
             // fpDivTextBox
             // 
             this.fpDivTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.fpDivTextBox.Location = new System.Drawing.Point(432, 254);
+            this.fpDivTextBox.Location = new System.Drawing.Point(324, 206);
+            this.fpDivTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fpDivTextBox.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
             this.fpDivTextBox.Name = "fpDivTextBox";
-            this.fpDivTextBox.Size = new System.Drawing.Size(132, 29);
+            this.fpDivTextBox.Size = new System.Drawing.Size(99, 24);
             this.fpDivTextBox.TabIndex = 11;
             // 
             // fpMulTextBox
             // 
             this.fpMulTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.fpMulTextBox.Location = new System.Drawing.Point(432, 215);
+            this.fpMulTextBox.Location = new System.Drawing.Point(324, 175);
+            this.fpMulTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fpMulTextBox.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
             this.fpMulTextBox.Name = "fpMulTextBox";
-            this.fpMulTextBox.Size = new System.Drawing.Size(132, 29);
+            this.fpMulTextBox.Size = new System.Drawing.Size(99, 24);
             this.fpMulTextBox.TabIndex = 10;
             // 
             // fpSubTextBox
             // 
             this.fpSubTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.fpSubTextBox.Location = new System.Drawing.Point(432, 176);
+            this.fpSubTextBox.Location = new System.Drawing.Point(324, 143);
+            this.fpSubTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fpSubTextBox.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
             this.fpSubTextBox.Name = "fpSubTextBox";
-            this.fpSubTextBox.Size = new System.Drawing.Size(132, 29);
+            this.fpSubTextBox.Size = new System.Drawing.Size(99, 24);
             this.fpSubTextBox.TabIndex = 9;
             // 
             // fpAddTextBox
             // 
             this.fpAddTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.fpAddTextBox.Location = new System.Drawing.Point(432, 135);
+            this.fpAddTextBox.Location = new System.Drawing.Point(324, 110);
+            this.fpAddTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fpAddTextBox.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
             this.fpAddTextBox.Name = "fpAddTextBox";
-            this.fpAddTextBox.Size = new System.Drawing.Size(132, 29);
+            this.fpAddTextBox.Size = new System.Drawing.Size(99, 24);
             this.fpAddTextBox.TabIndex = 8;
             // 
             // buffersTextBox
@@ -357,9 +352,10 @@ namespace PipeliningSimulation
             this.buffersTextBox.Items.AddRange(new object[] {
             "Yes",
             "No"});
-            this.buffersTextBox.Location = new System.Drawing.Point(153, 95);
+            this.buffersTextBox.Location = new System.Drawing.Point(115, 77);
+            this.buffersTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buffersTextBox.Name = "buffersTextBox";
-            this.buffersTextBox.Size = new System.Drawing.Size(132, 30);
+            this.buffersTextBox.Size = new System.Drawing.Size(100, 26);
             this.buffersTextBox.TabIndex = 1;
             // 
             // latenciesTextBox
@@ -370,17 +366,17 @@ namespace PipeliningSimulation
             this.latenciesTextBox.Items.AddRange(new object[] {
             "Yes",
             "No"});
-            this.latenciesTextBox.Location = new System.Drawing.Point(432, 95);
+            this.latenciesTextBox.Location = new System.Drawing.Point(324, 77);
+            this.latenciesTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.latenciesTextBox.Name = "latenciesTextBox";
-            this.latenciesTextBox.Size = new System.Drawing.Size(132, 30);
+            this.latenciesTextBox.Size = new System.Drawing.Size(100, 26);
             this.latenciesTextBox.TabIndex = 7;
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(181, 369);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(4);
+            this.saveButton.Location = new System.Drawing.Point(136, 300);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(140, 70);
+            this.saveButton.Size = new System.Drawing.Size(105, 57);
             this.saveButton.TabIndex = 13;
             this.saveButton.Text = "Save File";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -388,10 +384,10 @@ namespace PipeliningSimulation
             // 
             // ConfigurationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(651, 487);
+            this.ClientSize = new System.Drawing.Size(488, 396);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.latenciesTextBox);
             this.Controls.Add(this.buffersTextBox);
@@ -419,7 +415,7 @@ namespace PipeliningSimulation
             this.Controls.Add(this.reorderLabel);
             this.Controls.Add(this.bufferLabel);
             this.Controls.Add(this.configLabel);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConfigurationForm";
             this.Text = "Configuration";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConfigurationForm_FormClosed);

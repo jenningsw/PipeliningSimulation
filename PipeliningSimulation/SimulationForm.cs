@@ -55,6 +55,7 @@ namespace PipeliningSimulation {
                 cpu.Step();
 
                 lblCycleCount.Text = "Current Cycle: " + (cpu.cycle - 1); 
+                cycleCountLabel.Text = ""+(cpu.cycle - 1);
 
                 ClearPipelineInfo();
 
@@ -177,6 +178,39 @@ namespace PipeliningSimulation {
         {
             InstructionReferenceForm refform = new InstructionReferenceForm();
             refform.Show();
+        }
+
+        private void restartButton_Click(object sender, EventArgs e)
+        {
+            configListBox.Items.Clear();
+            configListBox.ResetText();
+
+            cycleCountLabel.ResetText();
+            cycleCountLabel.Text = "0";
+
+            delaysListBox.Items.Clear();
+            delaysListBox.ResetText();
+
+            instructsListBox.Items.Clear();
+            instructsListBox.ResetText();
+
+            issuesListBox.Items.Clear();
+            issuesListBox.ResetText();
+
+            execListBox.Items.Clear();
+            execListBox.ResetText();
+
+            readListBox.Items.Clear();
+            readListBox.ResetText();
+
+            writeListBox.Items.Clear();
+            writeListBox.ResetText();
+
+            commitsListBox.Items.Clear();
+            commitsListBox.ResetText();
+
+            lblCycleCount.Text = "Current Cycle:";
+
         }
     }
 }

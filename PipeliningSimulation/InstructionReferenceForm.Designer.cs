@@ -29,6 +29,7 @@ namespace PipeliningSimulation
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InstructionReferenceForm));
             this.formLabel = new System.Windows.Forms.Label();
             this.instructionLabel = new System.Windows.Forms.Label();
             this.instructTypeLabel = new System.Windows.Forms.Label();
@@ -77,7 +78,7 @@ namespace PipeliningSimulation
             this.instructionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.instructionLabel.Location = new System.Drawing.Point(167, 112);
             this.instructionLabel.Name = "instructionLabel";
-            this.instructionLabel.Size = new System.Drawing.Size(67, 16);
+            this.instructionLabel.Size = new System.Drawing.Size(66, 16);
             this.instructionLabel.TabIndex = 1;
             this.instructionLabel.Text = "Instruction";
             // 
@@ -87,7 +88,7 @@ namespace PipeliningSimulation
             this.instructTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.instructTypeLabel.Location = new System.Drawing.Point(46, 112);
             this.instructTypeLabel.Name = "instructTypeLabel";
-            this.instructTypeLabel.Size = new System.Drawing.Size(102, 16);
+            this.instructTypeLabel.Size = new System.Drawing.Size(101, 16);
             this.instructTypeLabel.TabIndex = 2;
             this.instructTypeLabel.Text = "Instruction Type";
             // 
@@ -97,7 +98,7 @@ namespace PipeliningSimulation
             this.descLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descLabel.Location = new System.Drawing.Point(453, 112);
             this.descLabel.Name = "descLabel";
-            this.descLabel.Size = new System.Drawing.Size(76, 16);
+            this.descLabel.Size = new System.Drawing.Size(75, 16);
             this.descLabel.TabIndex = 3;
             this.descLabel.Text = "Description";
             // 
@@ -107,7 +108,7 @@ namespace PipeliningSimulation
             this.formatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.formatLabel.Location = new System.Drawing.Point(275, 112);
             this.formatLabel.Name = "formatLabel";
-            this.formatLabel.Size = new System.Drawing.Size(50, 16);
+            this.formatLabel.Size = new System.Drawing.Size(49, 16);
             this.formatLabel.TabIndex = 4;
             this.formatLabel.Text = "Format";
             // 
@@ -309,6 +310,7 @@ namespace PipeliningSimulation
             this.Controls.Add(this.instructTypeLabel);
             this.Controls.Add(this.instructionLabel);
             this.Controls.Add(this.formLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InstructionReferenceForm";
             this.Text = "Reference Page";
             this.intructTypePanel.ResumeLayout(false);
