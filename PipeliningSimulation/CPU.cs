@@ -11,7 +11,9 @@ namespace PipeliningSimulation {
         List<List<Instruction>> pipeline = new List<List<Instruction>>(); // instructions in each stage of pipeline 
         public int cycle = 0;
         Register[] registers = new Register[16];
-        public int trueDependenceDelays = 0; 
+        public int trueDependenceDelays = 0;
+
+        public bool branchStall = false;        //Boolean to stall pipeline until branch calculation is complete
 
         public CPU(List<Instruction> inst) {
 
@@ -30,7 +32,8 @@ namespace PipeliningSimulation {
         /// Step through each stage of pipeline 
         /// </summary>
         public void Cycle() {
-            Issue();
+            if(!branchStall)    //If pipeline isn't stalled to wait for branch calculation, issue the next instruction
+                Issue();
             Execute();
             MemoryRead();
             WriteResult();
@@ -45,6 +48,11 @@ namespace PipeliningSimulation {
             if (pipeline[0].Count > 0) {
                 pipeline[0][0].MovedUpPipeline = true;
                 pipeline[0][0].Results[0] = cycle.ToString();
+
+
+                //If the issued instruction is a branch, stall the pipeline until instruction completion
+                if (pipeline[0][0].Type == "BRANCH")
+                    branchStall = true;
 
                 pipeline[1].Add(pipeline[0][0]); // move up pipeline to next stage 
                 pipeline[0].Clear();
@@ -124,6 +132,12 @@ namespace PipeliningSimulation {
                 registers[destID].InUse = false;
                 registers[destID].instIDX.Remove(instructions.IndexOf(write[0]));
             }    
+            // Finished instruction was a branch, stop stalling for branch completion
+            else
+            {
+                branchStall = false;
+            }
+            
 
             write.RemoveAt(0);
         }
