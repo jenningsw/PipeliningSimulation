@@ -191,6 +191,13 @@ namespace PipeliningSimulation {
             cpu = null;  
 
         }
+
+        private void btnRunWithoutPipeline_Click(object sender, EventArgs e) {
+            NonPipelinedCPU npCPU = new NonPipelinedCPU(InstructionList);
+            NonPipelined np = new NonPipelined(npCPU);
+            np.ShowDialog();
+
+        }
     }
 }
 

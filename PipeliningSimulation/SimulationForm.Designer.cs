@@ -51,6 +51,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.restartButton = new System.Windows.Forms.Button();
             this.cycleCountLabel = new System.Windows.Forms.Label();
+            this.btnRunWithoutPipeline = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -323,11 +324,22 @@
             this.cycleCountLabel.TabIndex = 62;
             this.cycleCountLabel.Text = "0";
             // 
+            // btnRunWithoutPipeline
+            // 
+            this.btnRunWithoutPipeline.Location = new System.Drawing.Point(557, 609);
+            this.btnRunWithoutPipeline.Name = "btnRunWithoutPipeline";
+            this.btnRunWithoutPipeline.Size = new System.Drawing.Size(112, 29);
+            this.btnRunWithoutPipeline.TabIndex = 63;
+            this.btnRunWithoutPipeline.Text = "Run w/o Pipeline";
+            this.btnRunWithoutPipeline.UseVisualStyleBackColor = true;
+            this.btnRunWithoutPipeline.Click += new System.EventHandler(this.btnRunWithoutPipeline_Click);
+            // 
             // SimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 650);
+            this.Controls.Add(this.btnRunWithoutPipeline);
             this.Controls.Add(this.cycleCountLabel);
             this.Controls.Add(this.restartButton);
             this.Controls.Add(this.label1);
@@ -393,6 +405,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button restartButton;
         private System.Windows.Forms.Label cycleCountLabel;
+        private System.Windows.Forms.Button btnRunWithoutPipeline;
     }
 }
 
