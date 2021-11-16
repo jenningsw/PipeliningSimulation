@@ -92,20 +92,67 @@ namespace PipeliningSimulation {
                         input += "|" + line;
 
                     Instructions = input.Split("|".ToCharArray()).ToList();
-                    instructsListBox.Items.Clear();
-                    instructsListBox.Items.AddRange(Instructions.ToArray()); 
+                    //instructsListBox.Items.Clear();
+                    //instructsListBox.Items.AddRange(Instructions.ToArray()); 
                 }
 
                 //Reload the instruction list to accomodate changes
                 InstructionList.Clear();
+                int instructionNumber = 1;  //Int to track instruction order
                 foreach (string instr in Instructions)
                 {
                     Instruction newInstruction = new Instruction(instr);
+                    newInstruction.InstructionNumber = instructionNumber;
                     if (newInstruction.Type == "LABEL")
                         LabelList.Add(newInstruction);
                     else
                         InstructionList.Add(newInstruction);
+
+                    instructionNumber += 1;
+
+                    if (InstructionList.Last().Type == "BRANCH")
+                    {
+                        int loopsRemaining = InstructionList.Last().LoopCount;
+
+
+                        //Set currentPosition to the most recently added instruction
+                        int currentPosition = InstructionList.Last().InstructionNumber;
+
+                        while (loopsRemaining > 0)
+                        {
+                            loopsRemaining -= 1; //Decrement number of loops remaining
+
+                            //Set branchPosition to the label being branched to
+                            int branchPosition = 0;
+                            branchPosition = LabelList[LabelList.FindIndex(i => i.InstructionName == InstructionList.Last().Destination)].InstructionNumber;
+
+
+                            //While adding the looped-through instructions...
+                            while (branchPosition < currentPosition)
+                            {
+                                branchPosition += 1;            //Increment branchPosition to the next instruction to duplicate
+                                InstructionList.Add(new Instruction(InstructionList[InstructionList.FindIndex(i => i.InstructionNumber == branchPosition)].InstructionString));    //Duplicate the instruction
+                                InstructionList.Last().InstructionNumber = instructionNumber;       //Set the instruction number
+                                instructionNumber += 1;         //Increment the instruction number for the next instruction
+
+                                //If at the duplicated branch instruction, modify loop count and string
+                                if (branchPosition == currentPosition)
+                                {
+                                    InstructionList.Last().LoopCount = loopsRemaining;
+                                    InstructionList.Last().InstructionString = InstructionList.Last().CreateBranchString();
+                                }
+                            }
+                        }
+                    }
                 }
+
+                instructsListBox.Items.Clear();
+                foreach (Instruction instr in InstructionList)
+                    instructsListBox.Items.Add(instr.InstructionString);
+
+                //foreach (Instruction instr in InstructionList)
+                    //execListBox.Items.Add(instr.InstructionNumber);
+
                 cpu = new CPU(InstructionList);
             }
         }

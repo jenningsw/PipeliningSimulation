@@ -206,5 +206,27 @@ namespace PipeliningSimulation
             CyclesLeft = TotalCycles;
 
         }
+
+        /// <summary>
+        /// Creates an instruction string in branch format
+        /// </summary>
+        /// <returns>Instruction string</returns>
+        public string CreateBranchString()
+        {
+            string branchString = "";
+
+            branchString += this.InstructionName;
+            branchString += " ";
+            branchString += this.Operand1;
+            branchString += ",";
+            branchString += this.Operand2;
+            branchString += ",";
+            branchString += this.Destination;
+            branchString += ":";
+            branchString += this.LoopCount;
+
+
+            return branchString;
+        }
     }
 }

@@ -56,7 +56,8 @@ namespace PipeliningSimulation {
             // fetch first instruction;
             pipeline[0].Add(instructions[idxInst]);
 
-            // mark destination reg as being used 
+            // mark destination reg as being used if instruction is not a branch instruction
+            if (instructions[idxInst].Type != "BRANCH")
             SetDestRegisterUseage(instructions[idxInst]);
 
             idxInst++;
@@ -116,10 +117,13 @@ namespace PipeliningSimulation {
             write[0].MovedUpPipeline = true;
             pipeline[4].Add(write[0]);
 
-            // dest register is no longer in use 
-            int destID = OperandToRegID(write[0].Destination);
-            registers[destID].InUse = false;
-            registers[destID].instIDX.Remove(instructions.IndexOf(write[0]));
+            // dest register is no longer in use;  applies only if instruction is not a branch
+            if (write[0].Type != "BRANCH")
+            {
+                int destID = OperandToRegID(write[0].Destination);
+                registers[destID].InUse = false;
+                registers[destID].instIDX.Remove(instructions.IndexOf(write[0]));
+            }    
 
             write.RemoveAt(0);
         }
