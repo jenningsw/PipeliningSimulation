@@ -100,7 +100,7 @@
             this.delaysListBox.ItemHeight = 16;
             this.delaysListBox.Location = new System.Drawing.Point(33, 425);
             this.delaysListBox.Name = "delaysListBox";
-            this.delaysListBox.Size = new System.Drawing.Size(233, 68);
+            this.delaysListBox.Size = new System.Drawing.Size(254, 68);
             this.delaysListBox.TabIndex = 39;
             // 
             // instructLabel
@@ -235,9 +235,9 @@
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(224, 549);
+            this.openFileButton.Location = new System.Drawing.Point(35, 509);
             this.openFileButton.Name = "openFileButton";
-            this.openFileButton.Size = new System.Drawing.Size(153, 55);
+            this.openFileButton.Size = new System.Drawing.Size(122, 55);
             this.openFileButton.TabIndex = 53;
             this.openFileButton.Text = "Open Trace File";
             this.openFileButton.UseVisualStyleBackColor = true;
@@ -245,19 +245,19 @@
             // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(584, 549);
+            this.runButton.Location = new System.Drawing.Point(621, 548);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(155, 55);
             this.runButton.TabIndex = 54;
-            this.runButton.Text = "Run";
+            this.runButton.Text = "Run to End";
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.runButton_Click);
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(756, 549);
+            this.exitButton.Location = new System.Drawing.Point(163, 509);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(155, 55);
+            this.exitButton.Size = new System.Drawing.Size(124, 55);
             this.exitButton.TabIndex = 55;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = true;
@@ -265,7 +265,7 @@
             // 
             // stepButton
             // 
-            this.stepButton.Location = new System.Drawing.Point(405, 549);
+            this.stepButton.Location = new System.Drawing.Point(447, 548);
             this.stepButton.Name = "stepButton";
             this.stepButton.Size = new System.Drawing.Size(153, 55);
             this.stepButton.TabIndex = 56;
@@ -285,9 +285,9 @@
             // 
             // referencePageButton
             // 
-            this.referencePageButton.Location = new System.Drawing.Point(44, 549);
+            this.referencePageButton.Location = new System.Drawing.Point(163, 570);
             this.referencePageButton.Name = "referencePageButton";
-            this.referencePageButton.Size = new System.Drawing.Size(153, 55);
+            this.referencePageButton.Size = new System.Drawing.Size(124, 55);
             this.referencePageButton.TabIndex = 58;
             this.referencePageButton.Text = "Instruction Reference";
             this.referencePageButton.UseVisualStyleBackColor = true;
@@ -305,9 +305,9 @@
             // 
             // restartButton
             // 
-            this.restartButton.Location = new System.Drawing.Point(933, 549);
+            this.restartButton.Location = new System.Drawing.Point(33, 570);
             this.restartButton.Name = "restartButton";
-            this.restartButton.Size = new System.Drawing.Size(128, 51);
+            this.restartButton.Size = new System.Drawing.Size(124, 55);
             this.restartButton.TabIndex = 61;
             this.restartButton.Text = "Reset Simulation";
             this.restartButton.UseVisualStyleBackColor = true;
