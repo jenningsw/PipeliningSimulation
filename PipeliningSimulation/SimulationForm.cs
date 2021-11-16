@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace PipeliningSimulation {
     public partial class SimulationForm : Form {
 
-        public string[] Instructions { get; set; } = new string[50];
+        public List<string> Instructions { get; set; } = new List<string>();
         public List<Instruction> InstructionList { get; set; } = new List<Instruction>();
         public List<Instruction> LabelList { get; set; } = new List<Instruction>();
         CPU cpu; 
@@ -91,9 +91,9 @@ namespace PipeliningSimulation {
                     while((line = reader.ReadLine()) != null)
                         input += "|" + line;
 
-                    Instructions = input.Split("|".ToCharArray());
+                    Instructions = input.Split("|".ToCharArray()).ToList();
                     instructsListBox.Items.Clear();
-                    instructsListBox.Items.AddRange(Instructions); 
+                    instructsListBox.Items.AddRange(Instructions.ToArray()); 
                 }
 
                 //Reload the instruction list to accomodate changes
@@ -157,6 +157,10 @@ namespace PipeliningSimulation {
                     writeListBox.Items.Add(i.Results[3]);
                     commitsListBox.Items.Add(i.Results[4]);
                 }
+
+
+                lblCycleCount.Text = "Current Cycle: " + (cpu.cycle - 1);
+                cycleCountLabel.Text = "" + (cpu.cycle - 1);
 
                 string[] delays = { "Reorder buffer delays: ", "Reservation station delays", 
                     "Data memory conflict delays: ", "True dependence delays: "  + cpu.trueDependenceDelays};
