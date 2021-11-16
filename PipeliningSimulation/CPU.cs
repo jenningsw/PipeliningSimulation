@@ -11,7 +11,8 @@ namespace PipeliningSimulation {
         List<List<Instruction>> pipeline = new List<List<Instruction>>(); // instructions in each stage of pipeline 
         public int cycle = 0;
         Register[] registers = new Register[16];
-        public int trueDependenceDelays = 0; 
+        public int trueDependenceDelays = 0;
+        bool completed = false; 
 
         public CPU(List<Instruction> inst) {
 
@@ -30,6 +31,8 @@ namespace PipeliningSimulation {
         /// Step through each stage of pipeline 
         /// </summary>
         public void Cycle() {
+            if (completed)
+                return; 
             Issue();
             Execute();
             MemoryRead();
@@ -38,6 +41,8 @@ namespace PipeliningSimulation {
 
             ResetPipeline();
             cycle++;
+            if (IsPipelineEmpty())
+                completed = true; 
         }
 
         private void Issue() {
@@ -185,6 +190,15 @@ namespace PipeliningSimulation {
         private bool CheckDependency(Instruction inst) {
             // if an operand is a register, check to see if it's being used by an instruction that is before the current instruction
             // if so, this will be a dependency and we should return true
+
+            int destID = OperandToRegID(inst.Destination); // write after write 
+            if (registers[destID].InUse) {
+                foreach (int n in registers[destID].instIDX) {
+                    if (n < instructions.IndexOf(inst))
+                        return true; 
+                }
+            }
+            // read after write 
             if (inst.Operand1.Contains("f")) {
                 int op1ID = OperandToRegID(inst.Operand1);
                 if (registers[op1ID].InUse) {
