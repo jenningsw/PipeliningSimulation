@@ -34,12 +34,12 @@ namespace PipeliningSimulation {
         private void SetDefaults()
         {
             configListBox.Items.Clear();
-            string[] defaultConfigText = { "Buffers: T", "Eff Addr: 2", "FP Adds: 3", "FP Muls: 3", "Ints: 3", "Reorder: 5", 
-                "Latencies: T", "FP Add: 2", "FP Sub: 2", "FP Mul: 5", "FP Div: 10" };
+            string[] defaultConfigText = { "Latencies: T", "FP Add: 2", "FP Sub: 2", "FP Mul: 5", "FP Div: 10" };
             configListBox.Items.AddRange(defaultConfigText);
 
             delaysListBox.Items.Clear();
-            string[] defaultDelaysText = { "Reorder buffer delays: ", "Reservation station delays", "Data memory conflict delays: ", "True dependence delays: " };
+            string[] defaultDelaysText = { "True dependence delays: " };
+
             delaysListBox.Items.AddRange(defaultDelaysText);
         }
 
@@ -78,8 +78,7 @@ namespace PipeliningSimulation {
                     commitsListBox.Items.Add(i.Results[4]);
                 }
 
-                string[] delays = { "Reorder buffer delays: ", "Reservation station delays",
-                    "Data memory conflict delays: ", "True dependence delays: "  + cpu.trueDependenceDelays};
+                string[] delays = { "True dependence delays: "  + cpu.trueDependenceDelays};
                 delaysListBox.Items.Clear();
                 delaysListBox.Items.AddRange(delays);
             }
@@ -214,8 +213,7 @@ namespace PipeliningSimulation {
                 lblCycleCount.Text = "Current Cycle: " + (cpu.cycle - 1);
                 cycleCountLabel.Text = "" + (cpu.cycle - 1);
 
-                string[] delays = { "Reorder buffer delays: ", "Reservation station delays", 
-                    "Data memory conflict delays: ", "True dependence delays: "  + cpu.trueDependenceDelays};
+                string[] delays = { "True dependence delays: "  + cpu.trueDependenceDelays};
                 delaysListBox.Items.Clear();
                 delaysListBox.Items.AddRange(delays);
 
