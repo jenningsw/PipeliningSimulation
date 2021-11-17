@@ -24,6 +24,7 @@ namespace PipeliningSimulation {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NonPipelined));
             this.commitsListBox = new System.Windows.Forms.ListBox();
             this.writeListBox = new System.Windows.Forms.ListBox();
             this.readListBox = new System.Windows.Forms.ListBox();
@@ -187,6 +188,7 @@ namespace PipeliningSimulation {
             this.Controls.Add(this.execLabel);
             this.Controls.Add(this.issuesLabel);
             this.Controls.Add(this.instructLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NonPipelined";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NonPipelined";
