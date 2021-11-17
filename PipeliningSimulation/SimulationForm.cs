@@ -17,6 +17,10 @@ namespace PipeliningSimulation {
         public List<Instruction> InstructionList { get; set; } = new List<Instruction>();           //All instructions to be run (with branches expanded)
         public List<Instruction> LabelList { get; set; } = new List<Instruction>();                 //All labels from the trace file in order
         CPU cpu; 
+        private int latFPAdd = 2;
+        private int latFPSub = 2;
+        private int latFPMul = 5;
+        private int latFPDiv = 10;
 
         public SimulationForm() {
             InitializeComponent();
@@ -48,7 +52,11 @@ namespace PipeliningSimulation {
         {
             ConfigurationForm configForm = new ConfigurationForm(this);
             this.Enabled = false;
-            configForm.Show();
+            configForm.ShowDialog();
+            latFPAdd = configForm.latFPAdd;
+            latFPSub = configForm.latFPSub;
+            latFPMul = configForm.latFPMul;
+            latFPDiv = configForm.latFPDiv;
         }
 
         private void stepButton_Click(object sender, EventArgs e)
@@ -114,7 +122,7 @@ namespace PipeliningSimulation {
                 //foreach (string instr in Instructions)     
                 {
                     //Turn the string into an instruction and add it to the appropriate list
-                    Instruction newInstruction = new Instruction(Instructions[currentInstr]);
+                    Instruction newInstruction = new Instruction(instr, latFPAdd, latFPSub, latFPMul, latFPDiv);
                     newInstruction.InstructionNumber = instructionNumber;
                     if (newInstruction.Type == "LABEL")
                         LabelList.Add(newInstruction);
@@ -190,42 +198,6 @@ namespace PipeliningSimulation {
             }
         }
 
-        //TODO: Delete this method before turning in
-        //Test method for checking instruction value successful setting
-        private void TestInstruction(Instruction instruction)
-        {
-            issuesListBox.Items.Add("name");
-            issuesListBox.Items.Add(instruction.InstructionName);
-            issuesListBox.Items.Add("op1");
-            issuesListBox.Items.Add(instruction.Operand1);
-            issuesListBox.Items.Add("op2");
-            issuesListBox.Items.Add(instruction.Operand2);
-            issuesListBox.Items.Add("dest");
-            issuesListBox.Items.Add(instruction.Destination);
-            issuesListBox.Items.Add("type");
-            issuesListBox.Items.Add(instruction.Type);
-            issuesListBox.Items.Add("loopcount");
-            issuesListBox.Items.Add(instruction.LoopCount);
-        }
-
-        //TODO: Delete this method before turning in
-        //Test method for checking branch label successful setting
-        private void TestLabel(Instruction instruction)
-        {
-            issuesListBox.Items.Add("name");
-            issuesListBox.Items.Add(instruction.InstructionName);
-            issuesListBox.Items.Add("op1");
-            issuesListBox.Items.Add(instruction.Operand1);
-            issuesListBox.Items.Add("op2");
-            issuesListBox.Items.Add(instruction.Operand2);
-            issuesListBox.Items.Add("dest");
-            issuesListBox.Items.Add(instruction.Destination);
-            issuesListBox.Items.Add("type");
-            issuesListBox.Items.Add(instruction.Type);
-            issuesListBox.Items.Add("loopcount");
-            issuesListBox.Items.Add(instruction.LoopCount);
-        }
-
         private void runButton_Click(object sender, EventArgs e) {
             if (InstructionList.Count > 0) {
                 ClearPipelineInfo();
@@ -293,9 +265,19 @@ namespace PipeliningSimulation {
             commitsListBox.Items.Clear();
             commitsListBox.ResetText();
 
+            InstructionList.Clear();
+
             SetDefaults();
 
             lblCycleCount.Text = "Current Cycle:";
+            cpu = null;  
+
+        }
+
+        private void btnRunWithoutPipeline_Click(object sender, EventArgs e) {
+            NonPipelinedCPU npCPU = new NonPipelinedCPU(InstructionList);
+            NonPipelined np = new NonPipelined(npCPU);
+            np.ShowDialog();
 
         }
     }

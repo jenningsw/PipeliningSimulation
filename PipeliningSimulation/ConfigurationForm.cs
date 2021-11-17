@@ -15,6 +15,10 @@ namespace PipeliningSimulation
     {
 
         private SimulationForm _simForm;
+        public int latFPAdd;
+        public int latFPSub;
+        public int latFPMul;
+        public int latFPDiv;
 
         public ConfigurationForm()
         {
@@ -137,27 +141,27 @@ namespace PipeliningSimulation
                 return;
             }
 
-            else if (Int32.Parse(fpAddTextBox.Text) < 0 || Int32.Parse(fpAddTextBox.Text) > 5)
+            else if (Int32.Parse(fpAddTextBox.Text) < 0)
             {
-                MessageBox.Show("Please change \"FP Add\" value to appropriate value: (0-5)");
+                MessageBox.Show("Please change \"FP Add\" value to appropriate value: (0-inf)");
                 return;
             }
 
-            else if (Int32.Parse(fpSubTextBox.Text) < 0 || Int32.Parse(fpSubTextBox.Text) > 5)
+            else if (Int32.Parse(fpSubTextBox.Text) < 0)
             {
-                MessageBox.Show("Please change \"FP Sub\" value to appropriate value: (0-5)");
+                MessageBox.Show("Please change \"FP Sub\" value to appropriate value: (0-inf)");
                 return;
             }
 
-            else if (Int32.Parse(fpMulTextBox.Text) < 0 || Int32.Parse(fpMulTextBox.Text) > 5)
+            else if (Int32.Parse(fpMulTextBox.Text) < 0)
             {
-                MessageBox.Show("Please change \"FP Mul\" value to appropriate value: (0-5)");
+                MessageBox.Show("Please change \"FP Mul\" value to appropriate value: (0-inf)");
                 return;
             }
 
-            else if (Int32.Parse(fpDivTextBox.Text) < 0 || Int32.Parse(fpDivTextBox.Text) > 10)
+            else if (Int32.Parse(fpDivTextBox.Text) < 0)
             {
-                MessageBox.Show("Please change \"FP Div\" value to appropriate value: (0-5)");
+                MessageBox.Show("Please change \"FP Div\" value to appropriate value: (0-inf)");
                 return;
             }
 
@@ -188,6 +192,10 @@ namespace PipeliningSimulation
 
         private void closeButton_Click(object sender, EventArgs e)
         {
+            latFPAdd = int.Parse(fpAddTextBox.Text);
+            latFPSub= int.Parse(fpSubTextBox.Text);
+            latFPMul = int.Parse(fpMulTextBox.Text);
+            latFPDiv = int.Parse(fpDivTextBox.Text);
             this.Close();
         }
 

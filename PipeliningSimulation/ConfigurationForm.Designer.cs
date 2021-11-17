@@ -222,7 +222,7 @@ namespace PipeliningSimulation
             // 
             this.fpMulsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.fpMulsTextBox.Location = new System.Drawing.Point(115, 175);
-            this.fpMulsTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fpMulsTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.fpMulsTextBox.Maximum = new decimal(new int[] {
             5,
             0,
@@ -236,7 +236,7 @@ namespace PipeliningSimulation
             // 
             this.fpAddsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.fpAddsTextBox.Location = new System.Drawing.Point(115, 143);
-            this.fpAddsTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fpAddsTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.fpAddsTextBox.Maximum = new decimal(new int[] {
             5,
             0,
@@ -250,7 +250,7 @@ namespace PipeliningSimulation
             // 
             this.intsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.intsTextBox.Location = new System.Drawing.Point(115, 206);
-            this.intsTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.intsTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.intsTextBox.Maximum = new decimal(new int[] {
             5,
             0,
@@ -264,7 +264,7 @@ namespace PipeliningSimulation
             // 
             this.effAddrTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.effAddrTextBox.Location = new System.Drawing.Point(115, 110);
-            this.effAddrTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.effAddrTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.effAddrTextBox.Maximum = new decimal(new int[] {
             5,
             0,
@@ -278,7 +278,7 @@ namespace PipeliningSimulation
             // 
             this.reorderTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.reorderTextBox.Location = new System.Drawing.Point(115, 241);
-            this.reorderTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.reorderTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.reorderTextBox.Maximum = new decimal(new int[] {
             5,
             0,
@@ -292,9 +292,9 @@ namespace PipeliningSimulation
             // 
             this.fpDivTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.fpDivTextBox.Location = new System.Drawing.Point(324, 206);
-            this.fpDivTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fpDivTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.fpDivTextBox.Maximum = new decimal(new int[] {
-            10,
+            9999,
             0,
             0,
             0});
@@ -306,9 +306,9 @@ namespace PipeliningSimulation
             // 
             this.fpMulTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.fpMulTextBox.Location = new System.Drawing.Point(324, 175);
-            this.fpMulTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fpMulTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.fpMulTextBox.Maximum = new decimal(new int[] {
-            5,
+            9999,
             0,
             0,
             0});
@@ -320,9 +320,9 @@ namespace PipeliningSimulation
             // 
             this.fpSubTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.fpSubTextBox.Location = new System.Drawing.Point(324, 143);
-            this.fpSubTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fpSubTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.fpSubTextBox.Maximum = new decimal(new int[] {
-            5,
+            9999,
             0,
             0,
             0});
@@ -334,9 +334,9 @@ namespace PipeliningSimulation
             // 
             this.fpAddTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.fpAddTextBox.Location = new System.Drawing.Point(324, 110);
-            this.fpAddTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fpAddTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.fpAddTextBox.Maximum = new decimal(new int[] {
-            5,
+            9999,
             0,
             0,
             0});
@@ -353,7 +353,7 @@ namespace PipeliningSimulation
             "Yes",
             "No"});
             this.buffersTextBox.Location = new System.Drawing.Point(115, 77);
-            this.buffersTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buffersTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.buffersTextBox.Name = "buffersTextBox";
             this.buffersTextBox.Size = new System.Drawing.Size(100, 26);
             this.buffersTextBox.TabIndex = 1;
@@ -367,7 +367,7 @@ namespace PipeliningSimulation
             "Yes",
             "No"});
             this.latenciesTextBox.Location = new System.Drawing.Point(324, 77);
-            this.latenciesTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.latenciesTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.latenciesTextBox.Name = "latenciesTextBox";
             this.latenciesTextBox.Size = new System.Drawing.Size(100, 26);
             this.latenciesTextBox.TabIndex = 7;
