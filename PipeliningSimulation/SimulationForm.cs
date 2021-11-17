@@ -122,7 +122,7 @@ namespace PipeliningSimulation {
                 //foreach (string instr in Instructions)     
                 {
                     //Turn the string into an instruction and add it to the appropriate list
-                    Instruction newInstruction = new Instruction(instr, latFPAdd, latFPSub, latFPMul, latFPDiv);
+                    Instruction newInstruction = new Instruction(Instructions[currentInstr], latFPAdd, latFPSub, latFPMul, latFPDiv);
                     newInstruction.InstructionNumber = instructionNumber;
                     if (newInstruction.Type == "LABEL")
                         LabelList.Add(newInstruction);

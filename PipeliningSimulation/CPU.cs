@@ -209,11 +209,16 @@ namespace PipeliningSimulation {
             // if an operand is a register, check to see if it's being used by an instruction that is before the current instruction
             // if so, this will be a dependency and we should return true
 
-            int destID = OperandToRegID(inst.Destination); // write after write 
-            if (registers[destID].InUse) {
-                foreach (int n in registers[destID].instIDX) {
-                    if (n < instructions.IndexOf(inst))
-                        return true; 
+            if(inst.Type != "BRANCH")
+            {
+                int destID = OperandToRegID(inst.Destination); // write after write 
+                if (registers[destID].InUse)
+                {
+                    foreach (int n in registers[destID].instIDX)
+                    {
+                        if (n < instructions.IndexOf(inst))
+                            return true;
+                    }
                 }
             }
             // read after write 
