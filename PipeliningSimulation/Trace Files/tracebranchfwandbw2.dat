@@ -1,6 +1,8 @@
 flw f6,32(x2):0
 flw f8,32(x2):0
-loop:
+bne f2,f8,jump:1
+fsub.s f2,f8,f6
+jump:
 fadd.s f2,f8,f6
-bne f2,f8,loop:1
+bne f2,f8,jump:1
 flw f8,32(x2):0

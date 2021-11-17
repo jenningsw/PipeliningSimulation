@@ -1,0 +1,14 @@
+flw f6,32(x2):0
+flw f8,32(x2):0
+bne f2,f8,loop:2
+fadd.s f2,f8,f6
+flw f8,32(x2):0
+flw f8,32(x2):0
+loop:
+flw f8,32(x2):0
+bne f2,f8,loop2:2
+fadd.s f2,f8,f6
+fadd.s f2,f8,f6
+fadd.s f2,f8,f6
+loop2:
+flw f8,32(x2):0

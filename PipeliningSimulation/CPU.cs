@@ -14,6 +14,8 @@ namespace PipeliningSimulation {
         public int trueDependenceDelays = 0;
         bool completed = false; 
 
+        public bool branchStall = false;        //Boolean to stall pipeline until branch calculation is complete
+
         public CPU(List<Instruction> inst) {
 
             for (int i = 0; i < 5; i++) {
@@ -33,7 +35,8 @@ namespace PipeliningSimulation {
         public void Cycle() {
             if (completed)
                 return; 
-            Issue();
+            if(!branchStall)    //If pipeline isn't stalled to wait for branch calculation, issue the next instruction
+                Issue();
             Execute();
             MemoryRead();
             WriteResult();
@@ -51,6 +54,11 @@ namespace PipeliningSimulation {
                 pipeline[0][0].MovedUpPipeline = true;
                 pipeline[0][0].Results[0] = cycle.ToString();
 
+
+                //If the issued instruction is a branch, stall the pipeline until instruction completion
+                if (pipeline[0][0].Type == "BRANCH")
+                    branchStall = true;
+
                 pipeline[1].Add(pipeline[0][0]); // move up pipeline to next stage 
                 pipeline[0].Clear();
             }
@@ -61,7 +69,8 @@ namespace PipeliningSimulation {
             // fetch first instruction;
             pipeline[0].Add(instructions[idxInst]);
 
-            // mark destination reg as being used 
+            // mark destination reg as being used if instruction is not a branch instruction
+            if (instructions[idxInst].Type != "BRANCH")
             SetDestRegisterUseage(instructions[idxInst]);
 
             idxInst++;
@@ -121,10 +130,19 @@ namespace PipeliningSimulation {
             write[0].MovedUpPipeline = true;
             pipeline[4].Add(write[0]);
 
-            // dest register is no longer in use 
-            int destID = OperandToRegID(write[0].Destination);
-            registers[destID].InUse = false;
-            registers[destID].instIDX.Remove(instructions.IndexOf(write[0]));
+            // dest register is no longer in use;  applies only if instruction is not a branch
+            if (write[0].Type != "BRANCH")
+            {
+                int destID = OperandToRegID(write[0].Destination);
+                registers[destID].InUse = false;
+                registers[destID].instIDX.Remove(instructions.IndexOf(write[0]));
+            }    
+            // Finished instruction was a branch, stop stalling for branch completion
+            else
+            {
+                branchStall = false;
+            }
+            
 
             write.RemoveAt(0);
         }
@@ -191,11 +209,16 @@ namespace PipeliningSimulation {
             // if an operand is a register, check to see if it's being used by an instruction that is before the current instruction
             // if so, this will be a dependency and we should return true
 
-            int destID = OperandToRegID(inst.Destination); // write after write 
-            if (registers[destID].InUse) {
-                foreach (int n in registers[destID].instIDX) {
-                    if (n < instructions.IndexOf(inst))
-                        return true; 
+            if(inst.Type != "BRANCH")
+            {
+                int destID = OperandToRegID(inst.Destination); // write after write 
+                if (registers[destID].InUse)
+                {
+                    foreach (int n in registers[destID].instIDX)
+                    {
+                        if (n < instructions.IndexOf(inst))
+                            return true;
+                    }
                 }
             }
             // read after write 

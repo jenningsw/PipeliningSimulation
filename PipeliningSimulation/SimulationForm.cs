@@ -12,10 +12,11 @@ using System.Windows.Forms;
 namespace PipeliningSimulation {
     public partial class SimulationForm : Form {
 
-        public List<string> Instructions { get; set; } = new List<string>();
-        public List<Instruction> InstructionList { get; set; } = new List<Instruction>();
-        public List<Instruction> LabelList { get; set; } = new List<Instruction>();
-        CPU cpu;
+        public List<string> Instructions { get; set; } = new List<string>();                        //List of instructions as string
+        public List<Instruction> InstructionListReduced { get; set; } = new List<Instruction>();    //All instructions and labels from the trace file in order
+        public List<Instruction> InstructionList { get; set; } = new List<Instruction>();           //All instructions to be run (with branches expanded)
+        public List<Instruction> LabelList { get; set; } = new List<Instruction>();                 //All labels from the trace file in order
+        CPU cpu; 
         private int latFPAdd = 2;
         private int latFPSub = 2;
         private int latFPMul = 5;
@@ -32,10 +33,12 @@ namespace PipeliningSimulation {
 
         private void SetDefaults()
         {
-            string[] defaultConfigText = { "Buffers: ", "Eff Addr: 2", "FP Adds: 3", "FP Muls: 3", "Ints: 3", "Reorder: 5", 
-                "Latencies: ", "FP Add: 2", "FP Sub: 2", "FP Mul: 5", "FP Div: 10" };
+            configListBox.Items.Clear();
+            string[] defaultConfigText = { "Buffers: T", "Eff Addr: 2", "FP Adds: 3", "FP Muls: 3", "Ints: 3", "Reorder: 5", 
+                "Latencies: T", "FP Add: 2", "FP Sub: 2", "FP Mul: 5", "FP Div: 10" };
             configListBox.Items.AddRange(defaultConfigText);
 
+            delaysListBox.Items.Clear();
             string[] defaultDelaysText = { "Reorder buffer delays: ", "Reservation station delays", "Data memory conflict delays: ", "True dependence delays: " };
             delaysListBox.Items.AddRange(defaultDelaysText);
         }
@@ -100,20 +103,97 @@ namespace PipeliningSimulation {
                         input += "|" + line;
 
                     Instructions = input.Split("|".ToCharArray()).ToList();
-                    instructsListBox.Items.Clear();
-                    instructsListBox.Items.AddRange(Instructions.ToArray()); 
+                    //instructsListBox.Items.Clear();
+                    //instructsListBox.Items.AddRange(Instructions.ToArray()); 
+                }
+
+                //Reload the reduced instruction list to accomodate changes
+                //NOTE: the reduced instruction list is an instruction-translated copy of the trace file
+                InstructionListReduced.Clear();
+                foreach (string instr in Instructions)
+                {
+                    InstructionListReduced.Add(new Instruction(instr));
                 }
 
                 //Reload the instruction list to accomodate changes
                 InstructionList.Clear();
-                foreach (string instr in Instructions)
+                int instructionNumber = 1;  //Int to track instruction order
+                for(int currentInstr = 0; currentInstr < Instructions.Count; currentInstr++) //For each string from the trace file
+                //foreach (string instr in Instructions)     
                 {
-                    Instruction newInstruction = new Instruction(instr, latFPAdd, latFPSub, latFPMul, latFPDiv);
+                    //Turn the string into an instruction and add it to the appropriate list
+                    Instruction newInstruction = new Instruction(Instructions[currentInstr], latFPAdd, latFPSub, latFPMul, latFPDiv);
+                    newInstruction.InstructionNumber = instructionNumber;
                     if (newInstruction.Type == "LABEL")
                         LabelList.Add(newInstruction);
                     else
                         InstructionList.Add(newInstruction);
+
+                    //Increment the instruction number to prepare for the next instruction
+                    instructionNumber += 1;
+
+                    //If the newly added instruction was a BRANCH instruction...
+                    if (InstructionList.Last().Type == "BRANCH")
+                    {
+                        //Keep track of the current position in the branch
+                        int branchPosition = 0;
+
+                        //Set currentPosition to the most recently added instruction
+                        int currentPosition = InstructionList.Last().InstructionNumber;
+                        //Set reducedCurrentPosition to the instruction's position in the reduced instruction list
+                        int reducedCurrentPosition = InstructionListReduced.FindIndex(i => i.InstructionString == InstructionList.Last().InstructionString);
+                        
+                        //If the branch goes backward and is taken, add the re-run instructions to the instruction list
+                        
+                        branchPosition = InstructionListReduced.FindIndex(i => i.InstructionName == InstructionList.Last().Destination);
+
+                        //If the branch goes forward and is taken, skip unrun instructions
+                        if (branchPosition > reducedCurrentPosition && InstructionList.Last().LoopCount > 0)
+                        {
+                            //Set currentInstr to the label being branched to
+                            currentInstr = InstructionListReduced.FindIndex(i => i.InstructionName == InstructionList.Last().Destination);
+                        }
+                        else if (branchPosition < currentPosition && InstructionList.Last().LoopCount > 0)
+                        {
+                            //Set the number of loops remaining to the loop count of the instruction
+                            int loopsRemaining = InstructionList.Last().LoopCount;
+
+                            //While there are more loops to expand...
+                            while (loopsRemaining > 0)
+                            {
+                                loopsRemaining -= 1; //Decrement number of loops remaining
+
+                                //Set branchPosition to the label being branched to
+                                branchPosition = LabelList[LabelList.FindIndex(i => i.InstructionName == InstructionList.Last().Destination)].InstructionNumber;
+
+
+                                //While adding the looped-through instructions...
+                                while (branchPosition < currentPosition)
+                                {
+                                    branchPosition += 1;            //Increment branchPosition to the next instruction to duplicate
+                                    InstructionList.Add(new Instruction(InstructionList[InstructionList.FindIndex(i => i.InstructionNumber == branchPosition)].InstructionString));    //Duplicate the instruction
+                                    InstructionList.Last().InstructionNumber = instructionNumber;       //Set the instruction number
+                                    instructionNumber += 1;         //Increment the instruction number for the next instruction
+
+                                    //If at the duplicated branch instruction, modify loop count and string
+                                    if (branchPosition == currentPosition)
+                                    {
+                                        InstructionList.Last().LoopCount = loopsRemaining;
+                                        InstructionList.Last().InstructionString = InstructionList.Last().CreateBranchString();
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
+
+                instructsListBox.Items.Clear();
+                foreach (Instruction instr in InstructionList)
+                    instructsListBox.Items.Add(instr.InstructionString);
+
+                //foreach (Instruction instr in InstructionList)
+                    //execListBox.Items.Add(instr.InstructionNumber);
+
                 cpu = new CPU(InstructionList);
             }
         }
@@ -158,14 +238,14 @@ namespace PipeliningSimulation {
 
         private void restartButton_Click(object sender, EventArgs e)
         {
-            configListBox.Items.Clear();
-            configListBox.ResetText();
+            //configListBox.Items.Clear();
+            //configListBox.ResetText();
 
             cycleCountLabel.ResetText();
             cycleCountLabel.Text = "0";
 
-            delaysListBox.Items.Clear();
-            delaysListBox.ResetText();
+            //delaysListBox.Items.Clear();
+            //delaysListBox.ResetText();
 
             instructsListBox.Items.Clear();
             instructsListBox.ResetText();
@@ -186,6 +266,8 @@ namespace PipeliningSimulation {
             commitsListBox.ResetText();
 
             InstructionList.Clear();
+
+            SetDefaults();
 
             lblCycleCount.Text = "Current Cycle:";
             cpu = null;  
