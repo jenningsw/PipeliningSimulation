@@ -102,99 +102,110 @@ namespace PipeliningSimulation {
                         input += "|" + line;
 
                     Instructions = input.Split("|".ToCharArray()).ToList();
-                    //instructsListBox.Items.Clear();
-                    //instructsListBox.Items.AddRange(Instructions.ToArray()); 
                 }
 
                 //Reload the reduced instruction list to accomodate changes
                 //NOTE: the reduced instruction list is an instruction-translated copy of the trace file
                 InstructionListReduced.Clear();
-                foreach (string instr in Instructions)
+                //int instructionNumber = 1;  //Int to track instruction order
+                for(int currentInstrNum = 0; currentInstrNum < Instructions.Count; currentInstrNum++)
                 {
-                    InstructionListReduced.Add(new Instruction(instr));
+                    Instruction newInstr = new Instruction(Instructions[currentInstrNum]);
+                    newInstr.InstructionNumber = currentInstrNum;
+                    InstructionListReduced.Add(newInstr);
                 }
+
 
                 //Reload the instruction list to accomodate changes
                 InstructionList.Clear();
-                int instructionNumber = 1;  //Int to track instruction order
-                for(int currentInstr = 0; currentInstr < Instructions.Count; currentInstr++) //For each string from the trace file
-                //foreach (string instr in Instructions)     
+                for(int currentInstrNum = 0; currentInstrNum < Instructions.Count; currentInstrNum += 0) //For each string from the trace file
                 {
-                    //Turn the string into an instruction and add it to the appropriate list
-                    Instruction newInstruction = new Instruction(Instructions[currentInstr], latFPAdd, latFPSub, latFPMul, latFPDiv);
-                    newInstruction.InstructionNumber = instructionNumber;
-                    if (newInstruction.Type == "LABEL")
-                        LabelList.Add(newInstruction);
+                    Instruction newInstruction = new Instruction(Instructions[currentInstrNum]);
+
+                    //Turn the string into an instruction and add it to the list if it isn't a label
+                    if (newInstruction.Type != "LABEL")
+                        currentInstrNum = AddInstruction(currentInstrNum);
                     else
-                        InstructionList.Add(newInstruction);
-
-                    //Increment the instruction number to prepare for the next instruction
-                    instructionNumber += 1;
-
-                    //If the newly added instruction was a BRANCH instruction...
-                    if (InstructionList.Last().Type == "BRANCH")
-                    {
-                        //Keep track of the current position in the branch
-                        int branchPosition = 0;
-
-                        //Set currentPosition to the most recently added instruction
-                        int currentPosition = InstructionList.Last().InstructionNumber;
-                        //Set reducedCurrentPosition to the instruction's position in the reduced instruction list
-                        int reducedCurrentPosition = InstructionListReduced.FindIndex(i => i.InstructionString == InstructionList.Last().InstructionString);
-                        
-                        //If the branch goes backward and is taken, add the re-run instructions to the instruction list
-                        
-                        branchPosition = InstructionListReduced.FindIndex(i => i.InstructionName == InstructionList.Last().Destination);
-
-                        //If the branch goes forward and is taken, skip unrun instructions
-                        if (branchPosition > reducedCurrentPosition && InstructionList.Last().LoopCount > 0)
-                        {
-                            //Set currentInstr to the label being branched to
-                            currentInstr = InstructionListReduced.FindIndex(i => i.InstructionName == InstructionList.Last().Destination);
-                        }
-                        else if (branchPosition < currentPosition && InstructionList.Last().LoopCount > 0)
-                        {
-                            //Set the number of loops remaining to the loop count of the instruction
-                            int loopsRemaining = InstructionList.Last().LoopCount;
-
-                            //While there are more loops to expand...
-                            while (loopsRemaining > 0)
-                            {
-                                loopsRemaining -= 1; //Decrement number of loops remaining
-
-                                //Set branchPosition to the label being branched to
-                                branchPosition = LabelList[LabelList.FindIndex(i => i.InstructionName == InstructionList.Last().Destination)].InstructionNumber;
-
-
-                                //While adding the looped-through instructions...
-                                while (branchPosition < currentPosition)
-                                {
-                                    branchPosition += 1;            //Increment branchPosition to the next instruction to duplicate
-                                    InstructionList.Add(new Instruction(InstructionList[InstructionList.FindIndex(i => i.InstructionNumber == branchPosition)].InstructionString));    //Duplicate the instruction
-                                    InstructionList.Last().InstructionNumber = instructionNumber;       //Set the instruction number
-                                    instructionNumber += 1;         //Increment the instruction number for the next instruction
-
-                                    //If at the duplicated branch instruction, modify loop count and string
-                                    if (branchPosition == currentPosition)
-                                    {
-                                        InstructionList.Last().LoopCount = loopsRemaining;
-                                        InstructionList.Last().InstructionString = InstructionList.Last().CreateBranchString();
-                                    }
-                                }
-                            }
-                        }
-                    }
+                        currentInstrNum += 1;
                 }
+
 
                 instructsListBox.Items.Clear();
                 foreach (Instruction instr in InstructionList)
                     instructsListBox.Items.Add(instr.InstructionString);
 
-                //foreach (Instruction instr in InstructionList)
-                    //execListBox.Items.Add(instr.InstructionNumber);
-
                 cpu = new CPU(InstructionList);
             }
+        }
+
+        /// <summary>
+        /// Method to add an instruction to the expanded instruction list
+        /// </summary>
+        /// <param name="instrNum">The number of the instruction in the reduced instruction list</param>
+        /// <returns>The new current instruction pointer</returns>
+        private int AddInstruction(int instrNum)
+        {
+            //Default new instruction position is one instruction after the current one
+            int newInstrPosition = instrNum+1;
+
+            //Add the instruction to the expanded list
+            Instruction newInstruction = new Instruction(Instructions[instrNum], latFPAdd, latFPSub, latFPMul, latFPDiv);
+            newInstruction.InstructionNumber = instrNum;
+            newInstruction.LoopCount = InstructionListReduced[instrNum].LoopCount;
+            if (newInstruction.Type != "LABEL")
+                InstructionList.Add(newInstruction);
+
+            //If new instruction was a branch, run branch operation
+            if (newInstruction.Type == "BRANCH")
+            {
+                InstructionListReduced[instrNum].LoopCount -= 1;    //Reduce remaining loops for the branch instruction
+                InstructionList.Last().InstructionString = InstructionList.Last().CreateBranchString(); //Regenerate the instruction string
+                if (InstructionList.Last().LoopCount <= 0)  //If the loop count is at or below 0, set to 0 and regenerate the instruction string again
+                {
+                    InstructionList.Last().LoopCount = 0;
+                    InstructionList.Last().InstructionString = InstructionList.Last().CreateBranchString();
+                }
+                //Branch can still loop, run AddBranch method
+                else
+                    newInstrPosition = AddBranch(instrNum);
+            }
+
+            return newInstrPosition;
+        }
+
+
+        /// <summary>
+        /// Method to handle adding branches to the expanded instruction list
+        /// </summary>
+        /// <param name="instrNum">The number of the instruction in the reduced instruction list</param>
+        /// <returns>The new current instruction pointer</returns>
+        private int AddBranch(int instrNum)
+        {
+            //Keep track of the current position in the branch
+            int branchPosition = InstructionListReduced.FindIndex(i => i.InstructionName == InstructionList.Last().Destination);
+            if (branchPosition == -1)
+                return Int32.MaxValue;  //Something went wrong; Abort
+
+            //Set currentPosition to the most recently added instruction
+            int currentPosition = InstructionList.Last().InstructionNumber;
+
+            //If the branch goes backward and is taken, add the re-run instructions to the instruction list
+            //If the branch goes forward and is taken, skip unrun instructions
+            if (branchPosition > currentPosition && InstructionList.Last().LoopCount > 0)
+            {
+                //Set the next instruction to the label being branched to
+                return InstructionListReduced.FindIndex(i => i.InstructionName == InstructionList.Last().Destination);
+            }
+            else if (branchPosition < currentPosition && InstructionList.Last().LoopCount > 0)
+            {
+                //Point branchPosition to the first instruction after the label
+                branchPosition += 1;
+
+                //Return the new instruction position
+                return branchPosition;
+            }
+
+            return instrNum+1;  //If no branches are followed, just proceed to the next instruction
         }
 
         private void runButton_Click(object sender, EventArgs e) {

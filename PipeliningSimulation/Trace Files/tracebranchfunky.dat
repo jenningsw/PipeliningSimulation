@@ -1,0 +1,12 @@
+flw f6,32(x2):0
+flw f8,32(x2):0
+bne f2,f8,jump:1
+fmul.s f2,f8,f6
+loop2:
+fsub.s f2,f8,f6
+loop1:
+fadd.s f2,f8,f6
+bne f2,f8,loop2:2
+jump:
+bne f2,f8,loop1:2
+flw f8,32(x2):0
