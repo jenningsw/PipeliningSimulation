@@ -54,7 +54,7 @@ namespace PipeliningSimulation
             strArray = new string[] { " add rd, rs1, rs2", "", " sub rd, rs1, rs2" };
             formatListBox2.Items.AddRange(strArray);
 
-            strArray = new string[] { " beq rs1, rs2, offset", "", " bne rs1, rs2, offset" };
+            strArray = new string[] { " beq rs1, rs2, label:n", "", " bne rs1, rs2, label:n" };
             formatListBox3.Items.AddRange(strArray);
 
             strArray = new string[] { " fadd.s rd, rs1, rs2", "", " fsub.s rd, rs1, rs2", "", " fmul.s rd, rs1, rs2", "", " fdiv.s rd, rs1, rs2" };
@@ -67,7 +67,7 @@ namespace PipeliningSimulation
             strArray = new string[] { "Add two values together and store in specified register", "", "Subtract two values and store in specified register" };
             descListBox2.Items.AddRange(strArray);
 
-            strArray = new string[] { "Branch if equal to", "", "Branch if not equal to" };
+            strArray = new string[] { "Branch if equal to; Will branch up to n times", "", "Branch if not equal to; Will branch up to n times" };
             descListBox3.Items.AddRange(strArray);
 
             strArray = new string[] { "Floating point add", "", "Floating point subtract", "", "Floating point multiply", "", "Floating point divide" };
